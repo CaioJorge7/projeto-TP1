@@ -6,7 +6,6 @@
 // TODO(Membro2): ARQUIVO PROVISORIO. Entidades escritas so para o Membro 3
 // poder compilar a camada de servico. Trocar pelas entidades oficiais
 // (nomes de classe e de metodos podem mudar).
-
 /**
  * @brief Entidade Pessoa (usuario do sistema).
  */

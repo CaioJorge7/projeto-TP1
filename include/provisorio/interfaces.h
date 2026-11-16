@@ -9,13 +9,21 @@
 // poder construir a camada de servico. Nomes, assinaturas e convencoes abaixo
 // sao todos a definir.
 //
-// Convencoes assumidas (TODO(Membro2): confirmar ou trocar):
-//  - Metodos retornam bool: true = sucesso, false = falha.
-//  - Resultados de leitura saem por parametro ponteiro.
-//  - "solicitante" e o email de quem esta logado. O servico confere se ele
-//    existe e se o papel dele tem direito ao servico.
+// ESCOLHA(Membro3): metodos retornam bool (true = sucesso, false = falha).
+//   Motivo: simples de usar na apresentacao.
+//   TODO(Membro2): confirmar ou trocar (excecao, codigo de erro).
+// ESCOLHA(Membro3): resultados de leitura saem por parametro ponteiro.
+// ESCOLHA(Membro3): quase todo metodo recebe "solicitante" (email de quem esta
+//   logado). Motivo: o servico confere o papel (GESTOR ou DESENVOLVEDOR) em cada
+//   servico sem precisar guardar sessao. Excecoes: autenticar e criar Pessoa
+//   (a conta nasce antes do login).
+// ESCOLHA(Membro3): os vinculos do diagrama entram nos metodos de criar (quadro
+//   recebe o projeto; cartao recebe o quadro e o desenvolvedor), para o servico
+//   garantir as multiplicidades.
+// ESCOLHA(Membro3): mover recebe o estado de destino e o momento. O servico so
+//   aceita A FAZER -> FAZENDO e FAZENDO -> FEITO, e aplica a regra do WIP.
+// ESCOLHA(Membro3): tempos das metricas em minutos.
 
-/**
  * @brief Interface do servico de autenticacao.
  */
 class ISAutenticacao {

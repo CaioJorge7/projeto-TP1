@@ -1,0 +1,38 @@
+digraph UML_Entidades {
+  graph [rankdir=TB, bgcolor="white", splines=polyline, nodesep=0.75, ranksep=0.90, pad=0.25,
+    fontname="DejaVu Sans", labelloc=t, label="DIAGRAMA UML DE ENTIDADES - SISTEMA KANBAN TP1",
+    fontsize=18, fontcolor="#12324B"];
+  node [shape=plain, fontname="DejaVu Sans", margin=0];
+  edge [color="#4C687C", fontname="DejaVu Sans", fontsize=10, arrowsize=0.7,
+    labelfontsize=10, penwidth=1.5, arrowhead=none];
+
+  Pessoa [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#2D607B">
+      <TR><TD BGCOLOR="#174466"><FONT COLOR="white"><B>Pessoa</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT POINT-SIZE="10">- email: Email &lt;&lt;PK&gt;&gt;<BR ALIGN="LEFT"/>- nome: Nome<BR ALIGN="LEFT"/>- senha: Senha<BR ALIGN="LEFT"/>- papel: Papel</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#EAF3F7"><FONT POINT-SIZE="10">+ Pessoa(...)<BR ALIGN="LEFT"/>+ getEmail(): const Email&amp;<BR ALIGN="LEFT"/>+ setEmail(Email): void<BR ALIGN="LEFT"/>+ set/get dos demais atributos</FONT></TD></TR>
+    </TABLE>>];
+  Projeto [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#2D607B">
+      <TR><TD BGCOLOR="#174466"><FONT COLOR="white"><B>Projeto</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT POINT-SIZE="10">- identificador: Identificador &lt;&lt;PK&gt;&gt;<BR ALIGN="LEFT"/>- nome: Nome<BR ALIGN="LEFT"/>- descricao: Texto<BR ALIGN="LEFT"/>- inicio: Timestamp<BR ALIGN="LEFT"/>- termino: Timestamp<BR ALIGN="LEFT"/>- gestorEmail: Email &lt;&lt;FK&gt;&gt;</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#EAF3F7"><FONT POINT-SIZE="10">+ Projeto(...)<BR ALIGN="LEFT"/>+ getIdentificador(): const Identificador&amp;<BR ALIGN="LEFT"/>+ setIdentificador(...): void<BR ALIGN="LEFT"/>+ set/get dos demais atributos</FONT></TD></TR>
+    </TABLE>>];
+  Quadro [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#2D607B">
+      <TR><TD BGCOLOR="#174466"><FONT COLOR="white"><B>Quadro</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT POINT-SIZE="10">- identificador: Identificador &lt;&lt;PK&gt;&gt;<BR ALIGN="LEFT"/>- nome: Nome<BR ALIGN="LEFT"/>- limite: Limite<BR ALIGN="LEFT"/>- projetoId: Identificador &lt;&lt;FK&gt;&gt;</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#EAF3F7"><FONT POINT-SIZE="10">+ Quadro(...)<BR ALIGN="LEFT"/>+ getIdentificador(): const Identificador&amp;<BR ALIGN="LEFT"/>+ setIdentificador(...): void<BR ALIGN="LEFT"/>+ set/get dos demais atributos</FONT></TD></TR>
+    </TABLE>>];
+  CartaoAtividade [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6" COLOR="#2D607B">
+      <TR><TD BGCOLOR="#174466"><FONT COLOR="white"><B>CartaoAtividade</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT POINT-SIZE="10">- identificador: Identificador &lt;&lt;PK&gt;&gt;<BR ALIGN="LEFT"/>- nome: Nome<BR ALIGN="LEFT"/>- descricao: Texto<BR ALIGN="LEFT"/>- prioridade: Prioridade<BR ALIGN="LEFT"/>- estado: Estado<BR ALIGN="LEFT"/>- tamanho: Tamanho<BR ALIGN="LEFT"/>- entrada: Timestamp<BR ALIGN="LEFT"/>- inicio: Timestamp [0..1]<BR ALIGN="LEFT"/>- termino: Timestamp [0..1]<BR ALIGN="LEFT"/>- quadroId: Identificador &lt;&lt;FK&gt;&gt;<BR ALIGN="LEFT"/>- desenvolvedorEmail: Email &lt;&lt;FK&gt;&gt;</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#EAF3F7"><FONT POINT-SIZE="10">+ CartaoAtividade(...)<BR ALIGN="LEFT"/>+ getIdentificador(): const Identificador&amp;<BR ALIGN="LEFT"/>+ setIdentificador(...): void<BR ALIGN="LEFT"/>+ temInicio(), temTermino(): bool<BR ALIGN="LEFT"/>+ set/get dos demais atributos</FONT></TD></TR>
+    </TABLE>>];
+
+  Pessoa -> Projeto [taillabel="1 gestor", headlabel="0..*", label="gerencia", labeldistance=2];
+  Projeto -> Quadro [taillabel="1 projeto", headlabel="0..*", label="contem", labeldistance=2];
+  Quadro -> CartaoAtividade [taillabel="1 quadro", headlabel="0..*", label="contem", labeldistance=2];
+  Pessoa -> CartaoAtividade [taillabel="1 desenvolvedor", headlabel="0..*", label="executa", minlen=2, constraint=false, color="#369DA4", labeldistance=2];
+}

@@ -1,62 +1,82 @@
 #ifndef CONTROLADORAS_PESSOA_H_INCLUDED
 #define CONTROLADORAS_PESSOA_H_INCLUDED
 
+#include <stdexcept>
 #include <vector>
 #include "dominios.h"
+#include "entidades.h"
+#include "interfaces.h"
 #include "containers.h"
-#include "provisorio/interfaces.h"
+#include "sessao.h"
 
-// TODO(Membro2): o include de provisorio/interfaces.h aponta para as interfaces
-// PROVISORIAS. Quando as oficiais existirem, trocar o caminho e conferir se os
-// nomes e as assinaturas dos metodos continuam batendo.
-//
+/**
+ * @file controladoras_pessoa.h
+ * @brief Controladoras de servico de autenticacao e de Pessoa.
+ */
+
 // ESCOLHA(Membro3): nomes das controladoras: "CS" (Controladora de Servico) +
-//   nome do servico, espelhando o "IS" das interfaces.
-// ESCOLHA(Membro3): cada controladora recebe por ponteiro os containers de que
-//   precisa. Assim todas compartilham os mesmos dados em memoria.
-// ESCOLHA(Membro3): o "solicitante" so e conferido quanto a existir no
-//   container de pessoas. Quem garante que o solicitante e mesmo quem fez login
-//   e a camada de apresentacao.
-//   TODO(Membro2): confirmar essa divisao de responsabilidade.
+//   nome do servico. Cada uma realiza a interface IServico... correspondente.
+// ESCOLHA(Membro3): cada controladora recebe por ponteiro os containers e a
+//   Sessao de que precisa. Assim todas compartilham os mesmos dados em memoria.
+// ESCOLHA(Membro3): falhas (sem login, papel sem direito, duplicidade, nao
+//   encontrado, regra violada) viram std::logic_error com uma mensagem, como
+//   o Membro 2 pediu em interfaces.h. Falha de formato continua sendo
+//   std::invalid_argument, lancada pelos dominios (e que tambem e logic_error).
 
 /**
  * @brief Controladora do servico de autenticacao.
  */
-class CSAutenticacao : public ISAutenticacao {
+class CSAutenticacao : public IServicoAutenticacao {
 private:
     ContainerPessoas* pessoas;
+    Sessao* sessao;
 
 public:
     /**
      * @brief Cria a controladora.
      * @param pessoas Container onde as contas estao guardadas.
+     * @param sessao Sessao compartilhada com as outras controladoras.
      */
-    explicit CSAutenticacao(ContainerPessoas* pessoas) : pessoas(pessoas) {}
+    CSAutenticacao(ContainerPessoas* pessoas, Sessao* sessao)
+        : pessoas(pessoas), sessao(sessao) {}
+
+    // ESCOLHA(Membro3): se a autenticacao falha, a sessao anterior tambem e
+    //   encerrada. Assim, depois de autenticar(), ha alguem autenticado se e
+    //   so se devolveu true.
+    /**
+     * @brief Autentica uma pessoa por email e senha.
+     * @param email Email da conta.
+     * @param senha Senha da conta.
+     * @return true se o email existe e a senha confere (a pessoa passa a ser o
+     *         usuario autenticado); false caso contrario.
+     */
+    bool autenticar(const Email& email, const Senha& senha) const override {
+        const Pessoa* pessoa = pessoas->pesquisar(email);
+        if (pessoa == nullptr || pessoa->getSenha().getValor() != senha.getValor()) {
+            sessao->encerrar();
+            return false;
+        }
+        sessao->iniciar(email);
+        return true;
+    }
 
     /**
-     * @brief Confere se existe uma pessoa com este email e esta senha.
-     * @return true se o email existe e a senha confere.
+     * @brief Encerra a sessao (logout).
      */
-    bool autenticar(const Email& email, const Senha& senha) override {
-        Pessoa pessoa;
-        if (!pessoas->pesquisar(email, &pessoa)) return false;
-        return pessoa.getSenha().getValor() == senha.getValor();
+    void encerrarSessao() {
+        sessao->encerrar();
     }
 };
 
 /**
  * @brief Controladora dos servicos 1 a 5 (CRUD e listagem de Pessoa).
  */
-class CSPessoa : public ISPessoa {
+class CSPessoa : public IServicoPessoa {
 private:
     ContainerPessoas* pessoas;
     ContainerProjetos* projetos;
     ContainerCartoes* cartoes;
-
-    bool solicitanteExiste(const Email& solicitante) const {
-        Pessoa pessoa;
-        return pessoas->pesquisar(solicitante, &pessoa);
-    }
+    Sessao* sessao;
 
     // Pessoa que e gestor de projeto ou desenvolvedor de cartao tem vinculos.
     bool temVinculos(const Email& email) const {
@@ -70,57 +90,97 @@ public:
      * @param pessoas Container de pessoas.
      * @param projetos Container de projetos (para conferir vinculos de gestor).
      * @param cartoes Container de cartoes (para conferir vinculos de desenvolvedor).
+     * @param sessao Sessao compartilhada com as outras controladoras.
      */
-    CSPessoa(ContainerPessoas* pessoas, ContainerProjetos* projetos, ContainerCartoes* cartoes)
-        : pessoas(pessoas), projetos(projetos), cartoes(cartoes) {}
+    CSPessoa(ContainerPessoas* pessoas, ContainerProjetos* projetos,
+             ContainerCartoes* cartoes, Sessao* sessao)
+        : pessoas(pessoas), projetos(projetos), cartoes(cartoes), sessao(sessao) {}
 
-    // ESCOLHA(Membro3): criar nao confere solicitante, pois a conta nasce antes
-    //   do login. Falha se ja existe pessoa com o mesmo email.
-    bool criar(const Pessoa& pessoa) override {
-        return pessoas->incluir(pessoa);
+    // ESCOLHA(Membro3): criar nao exige autenticacao, pois a conta nasce antes
+    //   do login (enunciado, secao 2).
+    /**
+     * @brief Cria uma conta.
+     * @param pessoa Dados da conta.
+     * @throw std::logic_error Se ja existe pessoa com o mesmo email.
+     */
+    void criar(const Pessoa& pessoa) override {
+        if (!pessoas->incluir(pessoa)) {
+            throw std::logic_error("Ja existe pessoa com este email.");
+        }
     }
 
-    // ESCOLHA(Membro3): qualquer pessoa logada pode ler os dados de qualquer
-    //   pessoa (o enunciado libera LER PESSOA para os dois papeis).
-    //   TODO(Membro2): decidir se a senha deve aparecer na leitura.
-    bool ler(const Email& solicitante, const Email& email, Pessoa* pessoa) override {
-        if (!solicitanteExiste(solicitante)) return false;
-        return pessoas->pesquisar(email, pessoa);
+    // ESCOLHA(Membro3): qualquer pessoa autenticada le qualquer pessoa (o
+    //   enunciado libera LER PESSOA para os dois papeis).
+    // TODO(Membro2): a leitura devolve a senha junto; decidir se isso e
+    //   aceitavel ou se a apresentacao deve esconde-la.
+    /**
+     * @brief Le os dados de uma pessoa.
+     * @param email Email da pessoa.
+     * @return Copia da pessoa.
+     * @throw std::logic_error Se ninguem esta autenticado ou a pessoa nao existe.
+     */
+    Pessoa ler(const Email& email) const override {
+        sessao->exigirUsuario(*pessoas);
+        const Pessoa* pessoa = pessoas->pesquisar(email);
+        if (pessoa == nullptr) {
+            throw std::logic_error("Pessoa nao encontrada.");
+        }
+        return *pessoa;
     }
 
-    // ESCOLHA(Membro3): so a propria pessoa atualiza seus dados. O email
-    //   (chave primaria) nao muda: a busca e feita por ele.
+    // ESCOLHA(Membro3): so a propria pessoa atualiza seus dados.
     // ESCOLHA(Membro3): o papel so pode mudar se a pessoa nao tiver vinculos
     //   (gestor de projeto ou desenvolvedor de cartao), para nao deixar o
     //   sistema inconsistente.
-    bool atualizar(const Email& solicitante, const Pessoa& pessoa) override {
-        if (solicitante.getValor() != pessoa.getEmail().getValor()) return false;
-        Pessoa atual;
-        if (!pessoas->pesquisar(solicitante, &atual)) return false;
-        if (atual.getPapel().getValor() != pessoa.getPapel().getValor() &&
-            temVinculos(solicitante)) {
-            return false;
+    /**
+     * @brief Atualiza os dados da propria pessoa autenticada.
+     * @param pessoa Novos dados (o email identifica a pessoa e nao muda).
+     * @throw std::logic_error Se ninguem esta autenticado, se o email nao e o do
+     *        usuario autenticado ou se o papel muda havendo vinculos.
+     */
+    void atualizar(const Pessoa& pessoa) override {
+        Pessoa usuario = sessao->exigirUsuario(*pessoas);
+        if (usuario.getEmail().getValor() != pessoa.getEmail().getValor()) {
+            throw std::logic_error("Somente a propria pessoa pode atualizar seus dados.");
         }
-        return pessoas->atualizar(pessoa);
+        if (usuario.getPapel().getValor() != pessoa.getPapel().getValor() &&
+            temVinculos(usuario.getEmail())) {
+            throw std::logic_error("Pessoa com projetos ou cartoes nao pode mudar de papel.");
+        }
+        pessoas->atualizar(pessoa);
     }
 
     // ESCOLHA(Membro3): so a propria pessoa exclui a propria conta, e so se nao
     //   tiver vinculos. Bloquear (em vez de apagar em cascata) evita
-    //   inconsistencia (requisito 15 do enunciado).
-    //   TODO(Membro2): se preferir cascata, mudar aqui.
-    bool excluir(const Email& solicitante, const Email& email) override {
-        if (solicitante.getValor() != email.getValor()) return false;
-        if (!solicitanteExiste(solicitante)) return false;
-        if (temVinculos(email)) return false;
-        return pessoas->remover(email);
+    //   inconsistencia (requisito 15 do enunciado). A sessao e encerrada junto.
+    // TODO(Membro2): se preferir cascata, mudar aqui.
+    /**
+     * @brief Exclui a propria conta da pessoa autenticada.
+     * @param email Email da conta a excluir.
+     * @throw std::logic_error Se ninguem esta autenticado, se o email nao e o do
+     *        usuario autenticado ou se a pessoa e gestor de projeto ou
+     *        desenvolvedor de cartao.
+     */
+    void excluir(const Email& email) override {
+        Pessoa usuario = sessao->exigirUsuario(*pessoas);
+        if (usuario.getEmail().getValor() != email.getValor()) {
+            throw std::logic_error("Somente a propria pessoa pode excluir sua conta.");
+        }
+        if (temVinculos(email)) {
+            throw std::logic_error("Pessoa com projetos ou cartoes nao pode ser excluida.");
+        }
+        pessoas->remover(email);
+        sessao->encerrar();
     }
 
-    // ESCOLHA(Membro3): listar devolve so os emails (identificadores), como o
-    //   enunciado pede.
-    bool listar(const Email& solicitante, vector<Email>* emails) override {
-        if (!solicitanteExiste(solicitante)) return false;
-        *emails = pessoas->listar();
-        return true;
+    /**
+     * @brief Lista todas as pessoas.
+     * @return Copias das pessoas, em ordem de email.
+     * @throw std::logic_error Se ninguem esta autenticado.
+     */
+    std::vector<Pessoa> listar() const override {
+        sessao->exigirUsuario(*pessoas);
+        return pessoas->listar();
     }
 };
 

@@ -1,52 +1,48 @@
 #ifndef CONTROLADORAS_QUADRO_H_INCLUDED
 #define CONTROLADORAS_QUADRO_H_INCLUDED
 
+#include <stdexcept>
 #include <vector>
 #include "dominios.h"
+#include "entidades.h"
+#include "interfaces.h"
 #include "containers.h"
-#include "provisorio/interfaces.h"
+#include "sessao.h"
 
-// TODO(Membro2): o include de provisorio/interfaces.h aponta para as interfaces
-// PROVISORIAS. Trocar quando as oficiais existirem.
+/**
+ * @file controladoras_quadro.h
+ * @brief Controladora de servico de Quadro.
+ */
 
 /**
  * @brief Controladora dos servicos 11 a 15 (CRUD e listagem de Quadro).
  */
-class CSQuadro : public ISQuadro {
+class CSQuadro : public IServicoQuadro {
 private:
     ContainerPessoas* pessoas;
     ContainerProjetos* projetos;
     ContainerQuadros* quadros;
     ContainerCartoes* cartoes;
+    Sessao* sessao;
 
-    bool solicitanteExiste(const Email& solicitante) const {
-        Pessoa pessoa;
-        return pessoas->pesquisar(solicitante, &pessoa);
-    }
-
-    // Verdadeiro se o solicitante e GESTOR e e o gestor deste projeto.
-    // Tambem e falso se o projeto nao existe.
-    bool ehGestorDoProjeto(const Email& solicitante, const Identificador& idProjeto) const {
-        Pessoa pessoa;
-        if (!pessoas->pesquisar(solicitante, &pessoa)) return false;
-        if (pessoa.getPapel().getValor() != "GESTOR") return false;
-        Email gestor;
-        if (!projetos->pesquisarGestor(idProjeto, &gestor)) return false;
-        return gestor.getValor() == solicitante.getValor();
-    }
-
-    // Quantidade de cartoes do quadro que estao na coluna FAZENDO (o WIP).
-    int contarFazendo(const Identificador& idQuadro) const {
-        int total = 0;
-        vector<Identificador> ids = cartoes->listarPorQuadro(idQuadro);
-        for (size_t i = 0; i < ids.size(); ++i) {
-            Cartao cartao;
-            if (cartoes->pesquisar(ids[i], &cartao) &&
-                cartao.getEstado().getValor() == "FAZENDO") {
-                ++total;
-            }
+    // Confere se o projeto existe e se o usuario e o gestor dele.
+    void exigirGestorDoProjeto(const Pessoa& usuario, const Identificador& idProjeto) const {
+        const Projeto* projeto = projetos->pesquisar(idProjeto);
+        if (projeto == nullptr) {
+            throw std::logic_error("Projeto nao encontrado.");
         }
-        return total;
+        if (projeto->getGestorEmail().getValor() != usuario.getEmail().getValor()) {
+            throw std::logic_error("Somente o gestor do projeto pode fazer esta operacao.");
+        }
+    }
+
+    // Devolve o quadro se ele existe.
+    const Quadro& exigirQuadro(const Identificador& id) const {
+        const Quadro* quadro = quadros->pesquisar(id);
+        if (quadro == nullptr) {
+            throw std::logic_error("Quadro nao encontrado.");
+        }
+        return *quadro;
     }
 
 public:
@@ -56,55 +52,94 @@ public:
      * @param projetos Container de projetos (para conferir o gestor).
      * @param quadros Container de quadros.
      * @param cartoes Container de cartoes (para conferir WIP e exclusao).
+     * @param sessao Sessao compartilhada com as outras controladoras.
      */
     CSQuadro(ContainerPessoas* pessoas, ContainerProjetos* projetos,
-             ContainerQuadros* quadros, ContainerCartoes* cartoes)
-        : pessoas(pessoas), projetos(projetos), quadros(quadros), cartoes(cartoes) {}
+             ContainerQuadros* quadros, ContainerCartoes* cartoes, Sessao* sessao)
+        : pessoas(pessoas), projetos(projetos), quadros(quadros), cartoes(cartoes),
+          sessao(sessao) {}
 
     // ESCOLHA(Membro3): so o gestor DO projeto cria quadro nele (nao basta ser
     //   GESTOR). Falha se o projeto nao existe ou se o identificador do quadro
     //   ja existe. Assim a multiplicidade 1 projeto : 0..* quadros e mantida.
-    bool criar(const Email& solicitante, const Identificador& projeto, const Quadro& quadro) override {
-        if (!ehGestorDoProjeto(solicitante, projeto)) return false;
-        return quadros->incluir(quadro, projeto);
+    /**
+     * @brief Cria um quadro em um projeto existente.
+     * @param quadro Dados do quadro (o projetoId indica o projeto).
+     * @throw std::logic_error Se o usuario nao e o gestor do projeto, o projeto
+     *        nao existe ou ja existe quadro com o mesmo identificador.
+     */
+    void criar(const Quadro& quadro) override {
+        Pessoa usuario = sessao->exigirGestor(*pessoas);
+        exigirGestorDoProjeto(usuario, quadro.getProjetoId());
+        if (!quadros->incluir(quadro)) {
+            throw std::logic_error("Ja existe quadro com este identificador.");
+        }
     }
 
-    // ESCOLHA(Membro3): qualquer pessoa logada le qualquer quadro.
-    bool ler(const Email& solicitante, const Identificador& id, Quadro* quadro) override {
-        if (!solicitanteExiste(solicitante)) return false;
-        return quadros->pesquisar(id, quadro);
+    // ESCOLHA(Membro3): qualquer pessoa autenticada le qualquer quadro.
+    /**
+     * @brief Le os dados de um quadro.
+     * @param identificador Identificador do quadro.
+     * @return Copia do quadro.
+     * @throw std::logic_error Se ninguem esta autenticado ou o quadro nao existe.
+     */
+    Quadro ler(const Identificador& identificador) const override {
+        sessao->exigirUsuario(*pessoas);
+        return exigirQuadro(identificador);
     }
 
     // ESCOLHA(Membro3): so o gestor do projeto do quadro atualiza. O
-    //   identificador (chave primaria) e o projeto do quadro nao mudam.
+    //   identificador e o projetoId nao mudam: valem os que ja estao guardados.
     // ESCOLHA(Membro3): o novo limite nao pode ser menor que o WIP atual
     //   (cartoes em FAZENDO), senao o quadro ficaria acima do limite.
-    bool atualizar(const Email& solicitante, const Quadro& quadro) override {
-        Identificador projeto;
-        if (!quadros->pesquisarProjeto(quadro.getIdentificador(), &projeto)) return false;
-        if (!ehGestorDoProjeto(solicitante, projeto)) return false;
-        if (quadro.getLimite().getValor() < contarFazendo(quadro.getIdentificador())) return false;
-        return quadros->atualizar(quadro);
+    /**
+     * @brief Atualiza os dados de um quadro.
+     * @param quadro Novos dados (o identificador identifica o quadro).
+     * @throw std::logic_error Se o usuario nao e o gestor do projeto do quadro,
+     *        o quadro nao existe ou o novo limite e menor que o WIP atual.
+     */
+    void atualizar(const Quadro& quadro) override {
+        Pessoa usuario = sessao->exigirGestor(*pessoas);
+        const Quadro& atual = exigirQuadro(quadro.getIdentificador());
+        exigirGestorDoProjeto(usuario, atual.getProjetoId());
+        if (quadro.getLimite().getValor() <
+            cartoes->contarPorEstado(atual.getIdentificador(), "FAZENDO")) {
+            throw std::logic_error("O novo limite e menor que o WIP atual do quadro.");
+        }
+        Quadro novo = quadro;
+        novo.setProjetoId(atual.getProjetoId());
+        quadros->atualizar(novo);
     }
 
     // ESCOLHA(Membro3): so o gestor do projeto do quadro exclui, e so se o
     //   quadro nao tiver cartoes (evita inconsistencia, requisito 15).
-    //   TODO(Membro2): se preferir cascata, mudar aqui.
-    bool excluir(const Email& solicitante, const Identificador& id) override {
-        Identificador projeto;
-        if (!quadros->pesquisarProjeto(id, &projeto)) return false;
-        if (!ehGestorDoProjeto(solicitante, projeto)) return false;
-        if (!cartoes->listarPorQuadro(id).empty()) return false;
-        return quadros->remover(id);
+    // TODO(Membro2): se preferir cascata, mudar aqui.
+    /**
+     * @brief Exclui um quadro.
+     * @param identificador Identificador do quadro.
+     * @throw std::logic_error Se o usuario nao e o gestor do projeto do quadro,
+     *        o quadro nao existe ou ainda tem cartoes.
+     */
+    void excluir(const Identificador& identificador) override {
+        Pessoa usuario = sessao->exigirGestor(*pessoas);
+        const Quadro& atual = exigirQuadro(identificador);
+        exigirGestorDoProjeto(usuario, atual.getProjetoId());
+        if (cartoes->contarPorQuadro(identificador) > 0) {
+            throw std::logic_error("Quadro com cartoes nao pode ser excluido.");
+        }
+        quadros->remover(identificador);
     }
 
-    // ESCOLHA(Membro3): listar devolve os identificadores de todos os quadros
-    //   para qualquer pessoa logada.
-    //   TODO(Membro2): decidir se deve listar so os quadros de um projeto.
-    bool listar(const Email& solicitante, vector<Identificador>* ids) override {
-        if (!solicitanteExiste(solicitante)) return false;
-        *ids = quadros->listar();
-        return true;
+    // TODO(Membro2): decidir se deve listar so os quadros de um projeto. Aqui
+    //   qualquer pessoa autenticada ve todos os quadros.
+    /**
+     * @brief Lista todos os quadros.
+     * @return Copias dos quadros, em ordem de identificador.
+     * @throw std::logic_error Se ninguem esta autenticado.
+     */
+    std::vector<Quadro> listar() const override {
+        sessao->exigirUsuario(*pessoas);
+        return quadros->listar();
     }
 };
 

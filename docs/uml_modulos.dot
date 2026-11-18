@@ -1,0 +1,24 @@
+digraph UML_Modulos {
+  graph [rankdir=TB, bgcolor="white", compound=true, nodesep=0.7, ranksep=0.5,
+    pad=0.25, fontname="DejaVu Sans", labelloc=t,
+    label="DIAGRAMA UML DE MODULOS E DEPENDENCIAS - TP1",
+    fontsize=18, fontcolor="#12324B"];
+  node [shape=box, style="rounded,filled", penwidth=1.4, fontname="DejaVu Sans", fontsize=12,
+        fillcolor="#EDF4F6", color="#44718A", fontcolor="#13354B", margin="0.25,0.15"];
+  edge [color="#47748D", penwidth=1.5, arrowsize=0.8, fontname="DejaVu Sans", fontsize=10];
+
+  Apresentacao [label="<<camada>>\nApresentacao\nMenus e controladoras (Membro 4)", fillcolor="#D3E9F2"];
+  Interfaces [label="<<contratos>>\nIServicoPessoa, IServicoAutenticacao\nIServicoProjeto, IServicoQuadro\nIServicoCartaoAtividade", fillcolor="#F4EBC7"];
+  Servico [label="<<camada>>\nServico\nControladoras, regras Kanban, WIP\nCRUD, autenticacao e metricas (Membro 3)", fillcolor="#D4EBE6"];
+  Entidades [label="<<modulo>>\nEntidades (Membro 2)\nPessoa, Projeto, Quadro, CartaoAtividade"];
+  Dominios [label="<<modulo>>\nDominios (Membro 1)\nEmail, Nome, Texto, Identificador, etc."];
+  Persistencia [label="<<modulo>>\nContêineres / SQLite (Membro 3)\nArmazenamento, integridade e consultas", fillcolor="#E9E2F3"];
+
+  Apresentacao -> Interfaces [label="utiliza"];
+  Servico -> Interfaces [style=dashed, arrowhead=empty, label="implementa", constraint=false];
+  Interfaces -> Entidades [label="tipos de retorno/parametro"];
+  Servico -> Entidades [label="opera sobre"];
+  Servico -> Persistencia [label="le e grava"];
+  Entidades -> Dominios [label="compostas por"];
+  Persistencia -> Entidades [label="armazena"];
+}

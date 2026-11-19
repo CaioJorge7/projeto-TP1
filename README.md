@@ -194,9 +194,6 @@ g++ -std=c++11 -Wall -Wextra -pedantic -Iinclude src/*.cpp main.cpp -o sistema_k
 * **Modelo de arquitetura**: `docs/modelo_de_arquitetura.pdf` (diagrama UML de módulos, interfaces e relacionamentos, responsabilidades de cada módulo, interfaces, modelo de entidades e decisões de projeto).
 * **Fontes dos diagramas**: `docs/uml_modulos.dot` e `docs/uml_entidades.dot` (Graphviz; gere a imagem com `dot -Tpng arquivo.dot -o arquivo.png`).
 
-
-### Documentação (Doxygen)
-- **Gerar documentação HTML**: execute `doxygen Doxyfile` na raiz do repositório (requer Doxygen instalado). Os arquivos HTML gerados ficam em `docs/doxygen/html/index.html`.
 ---
 
 ## Decisões de Projeto, Entrega e Referências

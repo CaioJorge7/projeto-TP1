@@ -4,14 +4,14 @@ Disciplina: Técnicas de Programação 1 (TP1) - UnB
 Sistema: Gestão de Projetos Kanban em C++
 ====================================================================
 
-1. MEMBRO 1 - Camada de Domínios
+1. Caio - Camada de Domínios
    - Nome Completo: Caio Jorge Soares Viana Jardim
    - Matrícula: 221003921
    - Artefatos produzidos:
      * Classes de domínio e validações de formato (include/dominios.h, src/dominios.cpp)
      * Testes unitários dos domínios (tests/testes_dominios.h, tests/testes_dominios.cpp, main_teste_dominios.cpp)
 
-2. MEMBRO 2 - Entidades, Interfaces e Modelo de Arquitetura
+2. Glauco - Entidades, Interfaces e Modelo de Arquitetura
    - Nome Completo: Glauco Kenzo Hassler Sugai
    - Matrícula: 242034760
    - Artefatos produzidos:
@@ -20,7 +20,7 @@ Sistema: Gestão de Projetos Kanban em C++
      * Modelo de Arquitetura UML em PDF (docs/Modelo_Arquitetura_TP1_Membro2.pdf)
      * Testes unitários das entidades (tests/testes_entidades.h, tests/testes_entidades.cpp, main_teste_entidades.cpp)
 
-3. MEMBRO 3 - Camada de Serviço e Persistência
+3. Pablo - Camada de Serviço e Persistência
    - Nome Completo: Pablo Rafael Nunes Oliveira
    - Matrícula: 221003986
    - Artefatos produzidos:
@@ -28,7 +28,7 @@ Sistema: Gestão de Projetos Kanban em C++
      * Gerenciamento de sessão, tempo e contêineres em memória (include/sessao.h, include/tempo.h, include/containers.h)
      * Testes unitários dos serviços (tests/testes_servicos.h, tests/testes_servicos.cpp, main_teste_servicos.cpp)
 
-4. MEMBRO 4 - Camada de Apresentação, Integração e Documentação
+4. Gabriel - Camada de Apresentação, Integração e Documentação
    - Nome Completo: Gabriel Monteiro Bohn
    - Matrícula: 242003763
    - Artefatos produzidos:

@@ -108,8 +108,8 @@ Implementada no formato *header-only* (sem `.cpp` próprio; basta incluir `inclu
 | **Excluir Cartão** | Gestor do projeto | Remove o cartão sem deixar referências inconsistentes. |
 | **Mover Cartão** | Autenticado | Permite apenas `A FAZER -> FAZENDO` (respeitando limite WIP e registrando `inicio`) e `FAZENDO -> FEITO` (registrando `termino`), respeitando a ordem cronológica. |
 | **Ler WIP** | Autenticado | Quantidade de cartões do quadro atualmente em `FAZENDO`. |
-| **Ler Tempo de Ciclo / Médio** | Autenticado | Para cartões em `FEITO`: `termino - inicio` (em minutos). Média sobre concluídos do quadro (lança exceção se não houver concluídos). |
-| **Ler Lead Time / Médio** | Autenticado | Para cartões em `FEITO`: `termino - entrada` (em minutos). Média sobre concluídos do quadro (lança exceção se não houver concluídos). |
+| **Ler Tempo de Ciclo / Medio** | Autenticado | Para cartões em `FEITO`: `termino - inicio` (em minutos). Média sobre concluídos do quadro (lança exceção se não houver concluídos). |
+| **Ler Lead Time / Medio** | Autenticado | Para cartões em `FEITO`: `termino - entrada` (em minutos). Média sobre concluídos do quadro (lança exceção se não houver concluídos). |
 
 ---
 

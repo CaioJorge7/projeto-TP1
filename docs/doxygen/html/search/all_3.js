@@ -1,0 +1,28 @@
+var searchData=
+[
+  ['a_20camada_20funciona_0',['Como a camada funciona',['../md_README__Membro3.html#autotoc_md15',1,'']]],
+  ['a_20camada_20para_20a_20apresentação_1',['Como ligar a camada (para a apresentação)',['../md_README__Membro3.html#autotoc_md17',1,'']]],
+  ['aberto_2',['Decisões e pontos em aberto',['../md_README__Membro3.html#autotoc_md19',1,'']]],
+  ['anoehbissexto_3',['anoEhBissexto',['../tempo_8h.html#a97736b4dbbdf491c8cb21e38c6178419',1,'tempo.h']]],
+  ['anonymous_5fnamespace_7bentidades_2ecpp_7d_4',['anonymous_namespace{entidades.cpp}',['../namespaceanonymous__namespace_02entidades_8cpp_03.html',1,'']]],
+  ['ao_20github_20da_20equipe_5',['Como enviar ao GitHub da equipe',['../md_README__Membro2.html#autotoc_md11',1,'']]],
+  ['apcartao_6',['apCartao',['../classAplicacao.html#a204a60bf0de53b4bc60cd66dbc4e0809',1,'Aplicacao']]],
+  ['aplicacao_7',['Aplicacao',['../classAplicacao.html',1,'Aplicacao'],['../classAplicacao.html#a57c342de244970a6cbd48b76fd516e43',1,'Aplicacao::Aplicacao(IServicoAutenticacao *sa, IServicoPessoa *sp, IServicoProjeto *spj, IServicoQuadro *sq, IServicoCartaoAtividade *sc, std::function&lt; void()&gt; fnLogout)']]],
+  ['appessoa_8',['apPessoa',['../classAplicacao.html#a81a0544d51be1157013904a52effb794',1,'Aplicacao']]],
+  ['approjeto_9',['apProjeto',['../classAplicacao.html#a27dcc2920494e736c40760f4ccc4c4a5',1,'Aplicacao']]],
+  ['apquadro_10',['apQuadro',['../classAplicacao.html#a2c9d9e990673516ea9eb2feac9f0ceae',1,'Aplicacao']]],
+  ['apresentação_11',['Como ligar a camada (para a apresentação)',['../md_README__Membro3.html#autotoc_md17',1,'']]],
+  ['apresentacao_2ecpp_12',['apresentacao.cpp',['../apresentacao_8cpp.html',1,'']]],
+  ['apresentacao_2eh_13',['apresentacao.h',['../apresentacao_8h.html',1,'']]],
+  ['apresentacaocartao_14',['ApresentacaoCartao',['../classApresentacaoCartao.html',1,'ApresentacaoCartao'],['../classApresentacaoCartao.html#a98a49aad27cf409a01c56cf1948cf080',1,'ApresentacaoCartao::ApresentacaoCartao()']]],
+  ['apresentacaopessoa_15',['ApresentacaoPessoa',['../classApresentacaoPessoa.html',1,'ApresentacaoPessoa'],['../classApresentacaoPessoa.html#ae2e44e1b9c924bab6a1d54411b8d0e85',1,'ApresentacaoPessoa::ApresentacaoPessoa()']]],
+  ['apresentacaoprojeto_16',['ApresentacaoProjeto',['../classApresentacaoProjeto.html',1,'ApresentacaoProjeto'],['../classApresentacaoProjeto.html#af1e9ec99d5489db9a7a11d0ed45f523d',1,'ApresentacaoProjeto::ApresentacaoProjeto()']]],
+  ['apresentacaoquadro_17',['ApresentacaoQuadro',['../classApresentacaoQuadro.html',1,'ApresentacaoQuadro'],['../classApresentacaoQuadro.html#a249d2abe4ea4616391356051d9e5b869',1,'ApresentacaoQuadro::ApresentacaoQuadro()']]],
+  ['arquitetura_18',['TP1 - Membro 2: Entidades, interfaces e arquitetura',['../md_README__Membro2.html',1,'']]],
+  ['arquivos_19',['Estrutura de Arquivos',['../index.html#autotoc_md1',1,'']]],
+  ['ativa_20',['ativa',['../classSessao.html#a2344f243400455d0986d06526f3a5701',1,'Sessao']]],
+  ['atributos_21',['Entidades e atributos',['../md_README__Membro2.html#autotoc_md8',1,'']]],
+  ['atualizar_22',['atualizar',['../classApresentacaoPessoa.html#a0bbee7a54f93ec8730ce2b95dd0f7844',1,'ApresentacaoPessoa::atualizar()'],['../classApresentacaoProjeto.html#ac8a0f42dd82ff39c925336fa20021a34',1,'ApresentacaoProjeto::atualizar()'],['../classApresentacaoQuadro.html#ac679ad801ad76349e0713fc55c0516c9',1,'ApresentacaoQuadro::atualizar()'],['../classApresentacaoCartao.html#a1bd43ff63c458fbbd6fce1af33fc3486',1,'ApresentacaoCartao::atualizar()'],['../classContainerPessoas.html#a87566435345be623f5424c8263ae4afe',1,'ContainerPessoas::atualizar()'],['../classContainerProjetos.html#abf46852313b2a759801b712155980cfc',1,'ContainerProjetos::atualizar()'],['../classContainerQuadros.html#a2f77fda3e08338f61c7788b6e08dacd9',1,'ContainerQuadros::atualizar()'],['../classContainerCartoes.html#a956732972dc13ab2609c0c6b34c340c5',1,'ContainerCartoes::atualizar()'],['../classCSCartao.html#a7305bb59d0db92d8064c8d3f9abae24a',1,'CSCartao::atualizar()'],['../classCSPessoa.html#a44c8c59a6d32d45165b2121918ccce92',1,'CSPessoa::atualizar()'],['../classCSProjeto.html#a2471d1cb7b9c4777a3600a63351e8f32',1,'CSProjeto::atualizar()'],['../classCSQuadro.html#a30ec93f33eb39e412e9fe8b3c5ce2afb',1,'CSQuadro::atualizar()'],['../classIServicoPessoa.html#ad29c9c5ed5bf8fca26a37cd1b7e1e8e6',1,'IServicoPessoa::atualizar()'],['../classIServicoProjeto.html#a4630cb277152db4e341511bd1df8c8b5',1,'IServicoProjeto::atualizar()'],['../classIServicoQuadro.html#afe1d6d33a7649c43ad12ea9f45dbb987',1,'IServicoQuadro::atualizar()'],['../classIServicoCartaoAtividade.html#a4953b9a12db29a8b169cfe7b8d0750cf',1,'IServicoCartaoAtividade::atualizar()']]],
+  ['autenticado_23',['autenticado',['../classAplicacao.html#a6326befed4ed0637dedbbc91e2258825',1,'Aplicacao']]],
+  ['autenticar_24',['autenticar',['../classAplicacao.html#ac33a7e26dc494ec6b6adfe3bf4d58fe7',1,'Aplicacao::autenticar()'],['../classCSAutenticacao.html#a980599ecd8b516ea12422ea986f15337',1,'CSAutenticacao::autenticar()'],['../classIServicoAutenticacao.html#aad7a9748c8acddb2f5739b730ab8e91c',1,'IServicoAutenticacao::autenticar()']]]
+];

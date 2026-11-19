@@ -28,7 +28,9 @@
  */
 class CSAutenticacao : public IServicoAutenticacao {
 private:
+    /** @brief Ponteiro para o conteiner de pessoas. */
     ContainerPessoas* pessoas;
+    /** @brief Ponteiro para a sessao compartilhada. */
     Sessao* sessao;
 
 public:
@@ -73,12 +75,20 @@ public:
  */
 class CSPessoa : public IServicoPessoa {
 private:
+    /** @brief Ponteiro para o conteiner de pessoas. */
     ContainerPessoas* pessoas;
+    /** @brief Ponteiro para o conteiner de projetos. */
     ContainerProjetos* projetos;
+    /** @brief Ponteiro para o conteiner de cartoes. */
     ContainerCartoes* cartoes;
+    /** @brief Ponteiro para a sessao compartilhada. */
     Sessao* sessao;
 
-    // Pessoa que e gestor de projeto ou desenvolvedor de cartao tem vinculos.
+    /**
+     * @brief Verifica se a pessoa e gestora de projetos ou desenvolvedora de cartoes.
+     * @param email Email da pessoa a verificar.
+     * @return true se possui vinculos ativos; false caso contrario.
+     */
     bool temVinculos(const Email& email) const {
         return projetos->contarPorGestor(email) > 0 ||
                cartoes->contarPorDesenvolvedor(email) > 0;

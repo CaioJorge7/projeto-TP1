@@ -22,13 +22,23 @@
  */
 class CSCartao : public IServicoCartaoAtividade {
 private:
+    /** @brief Ponteiro para o conteiner de pessoas. */
     ContainerPessoas* pessoas;
+    /** @brief Ponteiro para o conteiner de projetos. */
     ContainerProjetos* projetos;
+    /** @brief Ponteiro para o conteiner de quadros. */
     ContainerQuadros* quadros;
+    /** @brief Ponteiro para o conteiner de cartoes. */
     ContainerCartoes* cartoes;
+    /** @brief Ponteiro para a sessao compartilhada. */
     Sessao* sessao;
 
-    // Devolve o cartao se ele existe.
+    /**
+     * @brief Devolve o cartao caso exista.
+     * @param id Identificador do cartao.
+     * @return Referencia constante para o cartao.
+     * @throw std::logic_error Se o cartao nao existe.
+     */
     const CartaoAtividade& exigirCartao(const Identificador& id) const {
         const CartaoAtividade* cartao = cartoes->pesquisar(id);
         if (cartao == nullptr) {
@@ -37,7 +47,12 @@ private:
         return *cartao;
     }
 
-    // Devolve o quadro se ele existe.
+    /**
+     * @brief Devolve o quadro caso exista.
+     * @param id Identificador do quadro.
+     * @return Referencia constante para o quadro.
+     * @throw std::logic_error Se o quadro nao existe.
+     */
     const Quadro& exigirQuadro(const Identificador& id) const {
         const Quadro* quadro = quadros->pesquisar(id);
         if (quadro == nullptr) {
@@ -46,7 +61,12 @@ private:
         return *quadro;
     }
 
-    // Confere se o quadro existe e se o usuario e o gestor do projeto dele.
+    /**
+     * @brief Confere se o quadro existe e se o usuario e o gestor do projeto dele.
+     * @param usuario Pessoa autenticada.
+     * @param idQuadro Identificador do quadro.
+     * @throw std::logic_error Se projeto/quadro nao existem ou usuario nao e gestor.
+     */
     void exigirGestorDoQuadro(const Pessoa& usuario, const Identificador& idQuadro) const {
         const Quadro& quadro = exigirQuadro(idQuadro);
         const Projeto* projeto = projetos->pesquisar(quadro.getProjetoId());
@@ -58,7 +78,11 @@ private:
         }
     }
 
-    // Confere se a pessoa existe e tem papel DESENVOLVEDOR.
+    /**
+     * @brief Confere se a pessoa existe e tem papel DESENVOLVEDOR.
+     * @param email Email da pessoa a verificar.
+     * @throw std::logic_error Se a pessoa nao existe ou papel nao e DESENVOLVEDOR.
+     */
     void exigirDesenvolvedor(const Email& email) const {
         const Pessoa* pessoa = pessoas->pesquisar(email);
         if (pessoa == nullptr) {
@@ -69,8 +93,13 @@ private:
         }
     }
 
-    // Minutos entre dois timestamps. Falha se algum esta vazio ou se "ate" e
-    // anterior a "de".
+    /**
+     * @brief Calcula a diferenca em minutos entre dois timestamps.
+     * @param de Timestamp inicial.
+     * @param ate Timestamp final.
+     * @param minutos [out] Minutos calculados.
+     * @return true se valido; false se algum timestamp for invalido ou ate < de.
+     */
     static bool minutosEntre(const Timestamp& de, const Timestamp& ate, long* minutos) {
         long a, b;
         if (!timestampParaMinutos(de, &a) || !timestampParaMinutos(ate, &b)) return false;
@@ -79,7 +108,13 @@ private:
         return true;
     }
 
-    // Tempo de ciclo (lead = false) ou lead time (lead = true) de um cartao.
+    /**
+     * @brief Calcula tempo de ciclo ou lead time de um cartao concluido.
+     * @param id Identificador do cartao.
+     * @param lead true para lead time, false para cycle time.
+     * @return Minutos decorridos.
+     * @throw std::logic_error Se o cartao nao esta em FEITO ou datas invalidas.
+     */
     long lerTempo(const Identificador& id, bool lead) const {
         sessao->exigirUsuario(*pessoas);
         const CartaoAtividade& cartao = exigirCartao(id);
@@ -94,8 +129,13 @@ private:
         return total;
     }
 
-    // Media do tempo de ciclo (lead = false) ou do lead time (lead = true) dos
-    // cartoes concluidos de um quadro.
+    /**
+     * @brief Calcula a media do tempo de ciclo ou lead time dos cartoes concluidos do quadro.
+     * @param idQuadro Identificador do quadro.
+     * @param lead true para lead time, false para cycle time.
+     * @return Media em minutos.
+     * @throw std::logic_error Se nenhum cartao concluido.
+     */
     double lerMedia(const Identificador& idQuadro, bool lead) const {
         sessao->exigirUsuario(*pessoas);
         exigirQuadro(idQuadro);
@@ -198,3 +238,150 @@ public:
         novo.setEntrada(atual.getEntrada());
         novo.setInicio(atual.getInicio());
         novo.setTermino(atual.getTermino());
+        cartoes->atualizar(novo);
+    }
+
+    // ESCOLHA(Membro3): so o gestor do projeto do quadro exclui. Cartao nao
+    //   tem nada dependendo dele, entao pode ser excluido em qualquer coluna.
+    /**
+     * @brief Exclui um cartao.
+     * @param identificador Identificador do cartao.
+     * @throw std::logic_error Se o usuario nao e o gestor do projeto do quadro do
+     *        cartao ou o cartao nao existe.
+     */
+    void excluir(const Identificador& identificador) override {
+        Pessoa usuario = sessao->exigirGestor(*pessoas);
+        const CartaoAtividade& atual = exigirCartao(identificador);
+        exigirGestorDoQuadro(usuario, atual.getQuadroId());
+        cartoes->remover(identificador);
+    }
+
+    // ESCOLHA(Membro3): qualquer pessoa autenticada lista todos os cartoes.
+    // TODO(Membro2): decidir se deve listar so os cartoes de um quadro.
+    /**
+     * @brief Lista todos os cartoes.
+     * @return Copias dos cartoes, em ordem de identificador.
+     * @throw std::logic_error Se ninguem esta autenticado.
+     */
+    std::vector<CartaoAtividade> listar() const override {
+        sessao->exigirUsuario(*pessoas);
+        return cartoes->listar();
+    }
+
+    // ESCOLHA(Membro3): qualquer pessoa autenticada move qualquer cartao (o
+    //   enunciado libera MOVER para os dois papeis).
+    // ESCOLHA(Membro3): so valem A FAZER -> FAZENDO e FAZENDO -> FEITO.
+    //   A FAZER -> FAZENDO falha se o WIP ja chegou no limite do quadro e
+    //   grava "inicio". FAZENDO -> FEITO grava "termino". O instante nao pode
+    //   ser anterior ao timestamp anterior do cartao (evita tempo negativo).
+    /**
+     * @brief Move um cartao de A FAZER para FAZENDO, ou de FAZENDO para FEITO.
+     * @param idCartao Identificador do cartao.
+     * @param novoEstado Estado destino ("FAZENDO" ou "FEITO").
+     * @param instante Timestamp da mudanca de estado.
+     * @throw std::logic_error Se ninguem esta autenticado, a transicao e invalida,
+     *        o limite de WIP seria excedido ou o instante e anterior ao registro
+     *        anterior do cartao.
+     */
+    void mover(const Identificador& idCartao,
+               const Estado& novoEstado,
+               const Timestamp& instante) override {
+        sessao->exigirUsuario(*pessoas);
+        const CartaoAtividade& ref = exigirCartao(idCartao);
+        CartaoAtividade cartao = ref;    // copia mutavel
+
+        long agora;
+        if (!timestampParaMinutos(instante, &agora)) {
+            throw std::logic_error("Instante invalido.");
+        }
+
+        std::string atual = cartao.getEstado().getValor();
+        std::string alvo  = novoEstado.getValor();
+
+        if (atual == "A FAZER" && alvo == "FAZENDO") {
+            long entrada;
+            if (!timestampParaMinutos(cartao.getEntrada(), &entrada) || agora < entrada) {
+                throw std::logic_error("O instante e anterior a entrada do cartao.");
+            }
+            const Quadro& quadro = exigirQuadro(cartao.getQuadroId());
+            if (cartoes->contarPorEstado(cartao.getQuadroId(), "FAZENDO") >=
+                    quadro.getLimite().getValor()) {
+                throw std::logic_error("Limite de WIP do quadro atingido.");
+            }
+            cartao.setEstado(novoEstado);
+            cartao.setInicio(instante);
+        } else if (atual == "FAZENDO" && alvo == "FEITO") {
+            long inicio;
+            if (!timestampParaMinutos(cartao.getInicio(), &inicio) || agora < inicio) {
+                throw std::logic_error("O instante e anterior ao inicio do cartao.");
+            }
+            cartao.setEstado(novoEstado);
+            cartao.setTermino(instante);
+        } else {
+            throw std::logic_error("Transicao de estado invalida. Permitido: A FAZER->FAZENDO ou FAZENDO->FEITO.");
+        }
+        cartoes->atualizar(cartao);
+    }
+
+    // ESCOLHA(Membro3): tempo de ciclo = termino - inicio (em minutos). So
+    //   existe para cartao em FEITO.
+    /**
+     * @brief Calcula o cycle time do cartao (termino - inicio), em minutos.
+     * @param idCartao Identificador do cartao.
+     * @return Cycle time em minutos.
+     * @throw std::logic_error Se o cartao nao esta em FEITO ou as datas sao inconsistentes.
+     */
+    long lerTempoCiclo(const Identificador& idCartao) const override {
+        return lerTempo(idCartao, false);
+    }
+
+    // ESCOLHA(Membro3): media so dos cartoes em FEITO do quadro. Sem nenhum
+    //   cartao concluido lanca excecao.
+    /**
+     * @brief Media dos cycle times dos cartoes concluidos do quadro, em minutos.
+     * @param idQuadro Identificador do quadro.
+     * @return Media em minutos.
+     * @throw std::logic_error Se nenhum cartao do quadro esta em FEITO.
+     */
+    double lerTempoCicloMedio(const Identificador& idQuadro) const override {
+        return lerMedia(idQuadro, false);
+    }
+
+    // ESCOLHA(Membro3): lead time = termino - entrada (em minutos). So
+    //   existe para cartao em FEITO.
+    /**
+     * @brief Calcula o lead time do cartao (termino - entrada), em minutos.
+     * @param idCartao Identificador do cartao.
+     * @return Lead time em minutos.
+     * @throw std::logic_error Se o cartao nao esta em FEITO ou as datas sao inconsistentes.
+     */
+    long lerLeadTime(const Identificador& idCartao) const override {
+        return lerTempo(idCartao, true);
+    }
+
+    /**
+     * @brief Media dos lead times dos cartoes concluidos do quadro, em minutos.
+     * @param idQuadro Identificador do quadro.
+     * @return Media em minutos.
+     * @throw std::logic_error Se nenhum cartao do quadro esta em FEITO.
+     */
+    double lerLeadTimeMedio(const Identificador& idQuadro) const override {
+        return lerMedia(idQuadro, true);
+    }
+
+    // ESCOLHA(Membro3): WIP = quantidade de cartoes do quadro em FAZENDO.
+    /**
+     * @brief Contagem atual de cartoes em FAZENDO no quadro.
+     * @param idQuadro Identificador do quadro.
+     * @return Numero de cartoes em FAZENDO.
+     * @throw std::logic_error Se ninguem esta autenticado ou o quadro nao existe.
+     */
+    unsigned int lerWip(const Identificador& idQuadro) const override {
+        sessao->exigirUsuario(*pessoas);
+        exigirQuadro(idQuadro);
+        return static_cast<unsigned int>(
+            cartoes->contarPorEstado(idQuadro, "FAZENDO"));
+    }
+};
+
+#endif // CONTROLADORAS_CARTAO_H_INCLUDED

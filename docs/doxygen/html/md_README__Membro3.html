@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Sistema Kanban - TP1: TP1 - Membro 3: Camada de Serviço</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Sistema Kanban - TP1<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Sistema de Gestao de Projetos Kanban em C++ (TP1 - Tecnicas de Programacao 1)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('md_README__Membro3.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">TP1 - Membro 3: Camada de Serviço</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a class="anchor" id="autotoc_md13"></a> Controladoras, contêineres e regras Kanban do sistema de gestão de projetos (TP1 - Técnicas de Programação 1). A camada realiza as interfaces abstratas do Membro 2 (<code><a class="el" href="interfaces_8h.html" title="Contratos abstratos entre Apresentacao e Servico para o TP1 Kanban.">include/interfaces.h</a></code>), guarda as entidades dele (<code><a class="el" href="entidades_8h.html" title="Entidades do sistema de gestao de projetos Kanban (TP1).">include/entidades.h</a></code>) e usa os domínios do Membro 1 (<code><a class="el" href="dominios_8h.html">include/dominios.h</a></code>).</p>
+<h1><a class="anchor" id="autotoc_md14"></a>
+Conteúdo entregue</h1>
+<div class="fragment"><div class="line">├── include/</div>
+<div class="line">│   ├── containers.h              # Contêineres em memória (Pessoas, Projetos, Quadros, Cartões)</div>
+<div class="line">│   ├── sessao.h                  # Usuário autenticado, compartilhado entre as controladoras</div>
+<div class="line">│   ├── tempo.h                   # Conversão de Timestamp em minutos</div>
+<div class="line">│   ├── controladoras_pessoa.h    # CSAutenticacao e CSPessoa</div>
+<div class="line">│   ├── controladoras_projeto.h   # CSProjeto</div>
+<div class="line">│   ├── controladoras_quadro.h    # CSQuadro</div>
+<div class="line">│   └── controladoras_cartao.h    # CSCartao (CRUD, mover, métricas e WIP)</div>
+<div class="line">├── tests/</div>
+<div class="line">│   ├── testes_servicos.h         # Declaração dos testes da camada de serviço</div>
+<div class="line">│   └── testes_servicos.cpp       # 27 casos: autenticação + 26 serviços</div>
+<div class="line">└── main_teste_servicos.cpp       # Executável dos testes da camada de serviço</div>
+</div><!-- fragment --><p>A camada de serviço é feita só de cabeçalhos (<em>header-only</em>): não há <code>.cpp</code> dela para adicionar ao projeto do Code::Blocks. Basta o diretório <code>include/</code> estar no caminho de busca.</p>
+<h1><a class="anchor" id="autotoc_md15"></a>
+Como a camada funciona</h1>
+<ul>
+<li>Cada controladora realiza uma interface do Membro 2: <code><a class="el" href="classCSAutenticacao.html" title="Controladora do servico de autenticacao.">CSAutenticacao</a></code> (<code><a class="el" href="classIServicoAutenticacao.html" title="Contrato de autenticacao; requisito preliminar ao acesso.">IServicoAutenticacao</a></code>), <code><a class="el" href="classCSPessoa.html" title="Controladora dos servicos 1 a 5 (CRUD e listagem de Pessoa).">CSPessoa</a></code> (<code><a class="el" href="classIServicoPessoa.html" title="Contrato dos 5 servicos CRUD de Pessoa.">IServicoPessoa</a></code>), <code><a class="el" href="classCSProjeto.html" title="Controladora dos servicos 6 a 10 (CRUD e listagem de Projeto).">CSProjeto</a></code> (<code><a class="el" href="classIServicoProjeto.html" title="Contrato dos 5 servicos CRUD de Projeto.">IServicoProjeto</a></code>), <code><a class="el" href="classCSQuadro.html" title="Controladora dos servicos 11 a 15 (CRUD e listagem de Quadro).">CSQuadro</a></code> (<code><a class="el" href="classIServicoQuadro.html" title="Contrato dos 5 servicos CRUD de Quadro.">IServicoQuadro</a></code>) e <code><a class="el" href="classCSCartao.html" title="Controladora dos servicos 16 a 26 (CRUD, listagem, movimentacao e metricas de Cartao de atividade).">CSCartao</a></code> (<code><a class="el" href="classIServicoCartaoAtividade.html" title="Contrato dos 11 servicos de Cartao: CRUD, mover, metricas e WIP.">IServicoCartaoAtividade</a></code>).</li>
+<li>Os dados ficam em memória, em quatro contêineres (<code>std::map</code>), um por entidade. Os contêineres só guardam e buscam; as regras de negócio ficam nas controladoras.</li>
+<li>As interfaces não recebem "quem está logado". Por isso existe a <code><a class="el" href="classSessao.html" title="Usuario autenticado no momento (no maximo um).">Sessao</a></code>: <code>autenticar()</code> guarda o usuário e os demais serviços consultam a sessão para conferir o papel.</li>
+<li>Falhas (sem login, papel sem direito, duplicidade, não encontrado, regra violada) são avisadas por <code>std::logic_error</code> com uma mensagem. Falhas de formato continuam sendo <code>std::invalid_argument</code>, lançadas pelos domínios (que também é <code>std::logic_error</code>).</li>
+<li>Os tempos das métricas são em minutos, calculados a partir dos <code><a class="el" href="classTimestamp.html" title="Representa uma marcação de data e hora válida.">Timestamp</a></code> dos cartões.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md16"></a>
+Regras implementadas</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Serviço   </th><th class="markdownTableHeadNone">Quem pode   </th><th class="markdownTableHeadNone">Regras    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Autenticar   </td><td class="markdownTableBodyNone">qualquer pessoa   </td><td class="markdownTableBodyNone">Se falhar, a sessão anterior também é encerrada.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Criar pessoa   </td><td class="markdownTableBodyNone">sem login   </td><td class="markdownTableBodyNone">E-mail não pode repetir.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Ler / listar pessoa   </td><td class="markdownTableBodyNone">autenticado   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Atualizar pessoa   </td><td class="markdownTableBodyNone">a própria pessoa   </td><td class="markdownTableBodyNone">O papel só muda se a pessoa não for gestora de projeto nem desenvolvedora de cartão.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Excluir pessoa   </td><td class="markdownTableBodyNone">a própria pessoa   </td><td class="markdownTableBodyNone">Bloqueado se for gestora de projeto ou desenvolvedora de cartão. Encerra a sessão.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Criar projeto   </td><td class="markdownTableBodyNone">GESTOR   </td><td class="markdownTableBodyNone">Quem cria vira o gestor (o <code>gestorEmail</code> recebido é substituído).    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Ler / listar projeto   </td><td class="markdownTableBodyNone">autenticado   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Atualizar projeto   </td><td class="markdownTableBodyNone">gestor do projeto   </td><td class="markdownTableBodyNone"><a class="el" href="classIdentificador.html" title="Representa o código identificador único de entidades.">Identificador</a> e gestor não mudam.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Excluir projeto   </td><td class="markdownTableBodyNone">gestor do projeto   </td><td class="markdownTableBodyNone">Bloqueado se tiver quadros.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Criar quadro   </td><td class="markdownTableBodyNone">gestor do projeto   </td><td class="markdownTableBodyNone">O projeto precisa existir.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Ler / listar quadro   </td><td class="markdownTableBodyNone">autenticado   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Atualizar quadro   </td><td class="markdownTableBodyNone">gestor do projeto   </td><td class="markdownTableBodyNone">Novo limite não pode ser menor que o WIP atual. <a class="el" href="classIdentificador.html" title="Representa o código identificador único de entidades.">Identificador</a> e projeto não mudam.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Excluir quadro   </td><td class="markdownTableBodyNone">gestor do projeto   </td><td class="markdownTableBodyNone">Bloqueado se tiver cartões.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Criar cartão   </td><td class="markdownTableBodyNone">gestor do projeto   </td><td class="markdownTableBodyNone">O desenvolvedor precisa existir e ter papel DESENVOLVEDOR. O cartão entra em A FAZER e a <code>entrada</code> é obrigatória.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Ler / listar cartão   </td><td class="markdownTableBodyNone">autenticado   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Atualizar cartão   </td><td class="markdownTableBodyNone">gestor do projeto   </td><td class="markdownTableBodyNone"><a class="el" href="classEstado.html" title="Representa o estado de um cartão de atividade no quadro Kanban.">Estado</a>, datas e quadro não mudam (só o <code>mover</code> mexe neles). O desenvolvedor pode ser trocado por outro válido.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Excluir cartão   </td><td class="markdownTableBodyNone">gestor do projeto   </td><td class="markdownTableBodyNone"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Mover cartão   </td><td class="markdownTableBodyNone">autenticado   </td><td class="markdownTableBodyNone">Só A FAZER → FAZENDO (respeita o limite de WIP e grava o início) e FAZENDO → FEITO (grava o término). O instante não pode ser anterior ao registro anterior do cartão.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Tempo de ciclo / lead time   </td><td class="markdownTableBodyNone">autenticado   </td><td class="markdownTableBodyNone">Só para cartão em FEITO. Ciclo = término − início; lead time = término − entrada.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Tempo de ciclo médio / lead time médio   </td><td class="markdownTableBodyNone">autenticado   </td><td class="markdownTableBodyNone">Média dos cartões em FEITO do quadro. Sem nenhum concluído, lança exceção.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">WIP   </td><td class="markdownTableBodyNone">autenticado   </td><td class="markdownTableBodyNone">Quantidade de cartões do quadro em FAZENDO.   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md17"></a>
+Como ligar a camada (para a apresentação)</h1>
+<p>Os contêineres e a sessão precisam existir enquanto o programa roda e ser criados antes das controladoras:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="containers_8h.html">containers.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="sessao_8h.html">sessao.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="controladoras__pessoa_8h.html">controladoras_pessoa.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="controladoras__projeto_8h.html">controladoras_projeto.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="controladoras__quadro_8h.html">controladoras_quadro.h</a>&quot;</span></div>
+<div class="line"><span class="preprocessor">#include &quot;<a class="code" href="controladoras__cartao_8h.html">controladoras_cartao.h</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_class" href="classContainerPessoas.html">ContainerPessoas</a> pessoas;</div>
+<div class="line"><a class="code hl_class" href="classContainerProjetos.html">ContainerProjetos</a> projetos;</div>
+<div class="line"><a class="code hl_class" href="classContainerQuadros.html">ContainerQuadros</a> quadros;</div>
+<div class="line"><a class="code hl_class" href="classContainerCartoes.html">ContainerCartoes</a> cartoes;</div>
+<div class="line"><a class="code hl_class" href="classSessao.html">Sessao</a> sessao;</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_class" href="classCSAutenticacao.html">CSAutenticacao</a> autenticacao(&amp;pessoas, &amp;sessao);</div>
+<div class="line"><a class="code hl_class" href="classCSPessoa.html">CSPessoa</a> servicoPessoa(&amp;pessoas, &amp;projetos, &amp;cartoes, &amp;sessao);</div>
+<div class="line"><a class="code hl_class" href="classCSProjeto.html">CSProjeto</a> servicoProjeto(&amp;pessoas, &amp;projetos, &amp;quadros, &amp;sessao);</div>
+<div class="line"><a class="code hl_class" href="classCSQuadro.html">CSQuadro</a> servicoQuadro(&amp;pessoas, &amp;projetos, &amp;quadros, &amp;cartoes, &amp;sessao);</div>
+<div class="line"><a class="code hl_class" href="classCSCartao.html">CSCartao</a> servicoCartao(&amp;pessoas, &amp;projetos, &amp;quadros, &amp;cartoes, &amp;sessao);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// A apresentação deve depender só das interfaces:</span></div>
+<div class="line"><a class="code hl_class" href="classIServicoAutenticacao.html">IServicoAutenticacao</a>* sAutenticacao = &amp;autenticacao;</div>
+<div class="line"><a class="code hl_class" href="classIServicoPessoa.html">IServicoPessoa</a>* sPessoa = &amp;servicoPessoa;</div>
+<div class="line"><a class="code hl_class" href="classIServicoProjeto.html">IServicoProjeto</a>* sProjeto = &amp;servicoProjeto;</div>
+<div class="line"><a class="code hl_class" href="classIServicoQuadro.html">IServicoQuadro</a>* sQuadro = &amp;servicoQuadro;</div>
+<div class="line"><a class="code hl_class" href="classIServicoCartaoAtividade.html">IServicoCartaoAtividade</a>* sCartao = &amp;servicoCartao;</div>
+<div class="ttc" id="aclassCSAutenticacao_html"><div class="ttname"><a href="classCSAutenticacao.html">CSAutenticacao</a></div><div class="ttdoc">Controladora do servico de autenticacao.</div><div class="ttdef"><b>Definição</b> controladoras_pessoa.h:29</div></div>
+<div class="ttc" id="aclassCSCartao_html"><div class="ttname"><a href="classCSCartao.html">CSCartao</a></div><div class="ttdoc">Controladora dos servicos 16 a 26 (CRUD, listagem, movimentacao e metricas de Cartao de atividade).</div><div class="ttdef"><b>Definição</b> controladoras_cartao.h:23</div></div>
+<div class="ttc" id="aclassCSPessoa_html"><div class="ttname"><a href="classCSPessoa.html">CSPessoa</a></div><div class="ttdoc">Controladora dos servicos 1 a 5 (CRUD e listagem de Pessoa).</div><div class="ttdef"><b>Definição</b> controladoras_pessoa.h:76</div></div>
+<div class="ttc" id="aclassCSProjeto_html"><div class="ttname"><a href="classCSProjeto.html">CSProjeto</a></div><div class="ttdoc">Controladora dos servicos 6 a 10 (CRUD e listagem de Projeto).</div><div class="ttdef"><b>Definição</b> controladoras_projeto.h:20</div></div>
+<div class="ttc" id="aclassCSQuadro_html"><div class="ttname"><a href="classCSQuadro.html">CSQuadro</a></div><div class="ttdoc">Controladora dos servicos 11 a 15 (CRUD e listagem de Quadro).</div><div class="ttdef"><b>Definição</b> controladoras_quadro.h:20</div></div>
+<div class="ttc" id="aclassContainerCartoes_html"><div class="ttname"><a href="classContainerCartoes.html">ContainerCartoes</a></div><div class="ttdoc">Container de Cartoes de atividade, indexado pelo identificador.</div><div class="ttdef"><b>Definição</b> containers.h:242</div></div>
+<div class="ttc" id="aclassContainerPessoas_html"><div class="ttname"><a href="classContainerPessoas.html">ContainerPessoas</a></div><div class="ttdoc">Container de Pessoas, indexado pelo email.</div><div class="ttdef"><b>Definição</b> containers.h:35</div></div>
+<div class="ttc" id="aclassContainerProjetos_html"><div class="ttname"><a href="classContainerProjetos.html">ContainerProjetos</a></div><div class="ttdoc">Container de Projetos, indexado pelo identificador.</div><div class="ttdef"><b>Definição</b> containers.h:96</div></div>
+<div class="ttc" id="aclassContainerQuadros_html"><div class="ttname"><a href="classContainerQuadros.html">ContainerQuadros</a></div><div class="ttdoc">Container de Quadros, indexado pelo identificador.</div><div class="ttdef"><b>Definição</b> containers.h:169</div></div>
+<div class="ttc" id="aclassIServicoAutenticacao_html"><div class="ttname"><a href="classIServicoAutenticacao.html">IServicoAutenticacao</a></div><div class="ttdoc">Contrato de autenticacao; requisito preliminar ao acesso.</div><div class="ttdef"><b>Definição</b> interfaces.h:35</div></div>
+<div class="ttc" id="aclassIServicoCartaoAtividade_html"><div class="ttname"><a href="classIServicoCartaoAtividade.html">IServicoCartaoAtividade</a></div><div class="ttdoc">Contrato dos 11 servicos de Cartao: CRUD, mover, metricas e WIP.</div><div class="ttdef"><b>Definição</b> interfaces.h:83</div></div>
+<div class="ttc" id="aclassIServicoPessoa_html"><div class="ttname"><a href="classIServicoPessoa.html">IServicoPessoa</a></div><div class="ttdoc">Contrato dos 5 servicos CRUD de Pessoa.</div><div class="ttdef"><b>Definição</b> interfaces.h:18</div></div>
+<div class="ttc" id="aclassIServicoProjeto_html"><div class="ttname"><a href="classIServicoProjeto.html">IServicoProjeto</a></div><div class="ttdoc">Contrato dos 5 servicos CRUD de Projeto.</div><div class="ttdef"><b>Definição</b> interfaces.h:44</div></div>
+<div class="ttc" id="aclassIServicoQuadro_html"><div class="ttname"><a href="classIServicoQuadro.html">IServicoQuadro</a></div><div class="ttdoc">Contrato dos 5 servicos CRUD de Quadro.</div><div class="ttdef"><b>Definição</b> interfaces.h:61</div></div>
+<div class="ttc" id="aclassSessao_html"><div class="ttname"><a href="classSessao.html">Sessao</a></div><div class="ttdoc">Usuario autenticado no momento (no maximo um).</div><div class="ttdef"><b>Definição</b> sessao.h:28</div></div>
+<div class="ttc" id="acontainers_8h_html"><div class="ttname"><a href="containers_8h.html">containers.h</a></div><div class="ttdoc">Containers em memoria da camada de servico (um por entidade).</div></div>
+<div class="ttc" id="acontroladoras__cartao_8h_html"><div class="ttname"><a href="controladoras__cartao_8h.html">controladoras_cartao.h</a></div><div class="ttdoc">Controladora de servico de Cartao de atividade (CRUD, mover e metricas).</div></div>
+<div class="ttc" id="acontroladoras__pessoa_8h_html"><div class="ttname"><a href="controladoras__pessoa_8h.html">controladoras_pessoa.h</a></div><div class="ttdoc">Controladoras de servico de autenticacao e de Pessoa.</div></div>
+<div class="ttc" id="acontroladoras__projeto_8h_html"><div class="ttname"><a href="controladoras__projeto_8h.html">controladoras_projeto.h</a></div><div class="ttdoc">Controladora de servico de Projeto.</div></div>
+<div class="ttc" id="acontroladoras__quadro_8h_html"><div class="ttname"><a href="controladoras__quadro_8h.html">controladoras_quadro.h</a></div><div class="ttdoc">Controladora de servico de Quadro.</div></div>
+<div class="ttc" id="asessao_8h_html"><div class="ttname"><a href="sessao_8h.html">sessao.h</a></div><div class="ttdoc">Guarda quem esta autenticado, para as controladoras conferirem o papel.</div></div>
+</div><!-- fragment --><p>Uso:</p><ul>
+<li>Criar a conta (<code>sPessoa-&gt;criar</code>) não exige login. Os demais serviços exigem <code>sAutenticacao-&gt;autenticar(email, senha)</code> antes.</li>
+<li>Para sair da conta, use <code>autenticacao.encerrarSessao()</code> (hoje só existe na classe concreta, não na interface).</li>
+<li>Envolva as chamadas em <code>try { ... } catch (const std::logic_error&amp; e) { ... }</code> e mostre <code>e.what()</code> ao usuário.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md18"></a>
+Compilação e testes (GCC C++11)</h1>
+<div class="fragment"><div class="line">g++ -std=c++11 -Wall -Wextra -pedantic -Iinclude \</div>
+<div class="line">  src/dominios.cpp src/entidades.cpp tests/testes_servicos.cpp \</div>
+<div class="line">  main_teste_servicos.cpp -o teste_servicos</div>
+<div class="line">./teste_servicos</div>
+</div><!-- fragment --><p>No Code::Blocks, os testes são um executável à parte: não compile <code>main_teste_servicos.cpp</code> junto com o <code><a class="el" href="main_8cpp.html" title="Ponto de entrada do sistema Kanban - TP1.">main.cpp</a></code> final, pois os dois têm uma função <code>main</code>.</p>
+<h1><a class="anchor" id="autotoc_md19"></a>
+Decisões e pontos em aberto</h1>
+<p>As decisões da camada de serviço estão registradas nos comentários do código como <code>ESCOLHA(Membro3)</code>. O que depende de definição da equipe está marcado como <code>TODO(Membro2)</code>. Para listar tudo:</p>
+<div class="fragment"><div class="line">grep -rn &quot;ESCOLHA(Membro3)&quot; include tests</div>
+<div class="line">grep -rn &quot;TODO(Membro2)&quot; include tests</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+  </ul>
+</div>
+</body>
+</html>

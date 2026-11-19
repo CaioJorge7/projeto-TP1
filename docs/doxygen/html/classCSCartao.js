@@ -1,0 +1,27 @@
+var classCSCartao =
+[
+    [ "CSCartao", "classCSCartao.html#a651f22244453989cf881ec9061f3e437", null ],
+    [ "atualizar", "classCSCartao.html#a7305bb59d0db92d8064c8d3f9abae24a", null ],
+    [ "criar", "classCSCartao.html#a3eb2cce4e7107cbd871c2a1b43260069", null ],
+    [ "excluir", "classCSCartao.html#a14f3a168323a9674e4f9f97003a0d0b7", null ],
+    [ "exigirCartao", "classCSCartao.html#a3be93a0d8f69f03adbcfd94413bf7fa1", null ],
+    [ "exigirDesenvolvedor", "classCSCartao.html#a8bf1a174ec850e4faf369986c25db108", null ],
+    [ "exigirGestorDoQuadro", "classCSCartao.html#a2fe636363f05b5c541d7fff1bacb4d18", null ],
+    [ "exigirQuadro", "classCSCartao.html#aba5049ba3dcf7d97eee7aae278326364", null ],
+    [ "ler", "classCSCartao.html#a99d49f80a0ef1de5042b0b0676fe903e", null ],
+    [ "lerLeadTime", "classCSCartao.html#a96d999aa817017d0eeafbebecbd548d9", null ],
+    [ "lerLeadTimeMedio", "classCSCartao.html#a2f1cb902ca1e7b586ff43a89ce4f8034", null ],
+    [ "lerMedia", "classCSCartao.html#a3920d672daa0aa95a62c44461bc6d11b", null ],
+    [ "lerTempo", "classCSCartao.html#a9924ac9bdcdce608a91257f44b76f466", null ],
+    [ "lerTempoCiclo", "classCSCartao.html#a3b861b639c2106ded77def63a002f9ea", null ],
+    [ "lerTempoCicloMedio", "classCSCartao.html#a1332cf7021db84ca997b79acd4676a5c", null ],
+    [ "lerWip", "classCSCartao.html#a4fe05506a633acae7e3bf446794c968a", null ],
+    [ "listar", "classCSCartao.html#ae9e4a12a29e4c8b2596b721b382d6a4b", null ],
+    [ "minutosEntre", "classCSCartao.html#a36110981bb4da89880611f9c6f7d7fb0", null ],
+    [ "mover", "classCSCartao.html#a910d290e093700b3398395976ecc759b", null ],
+    [ "cartoes", "classCSCartao.html#a7e80384f2c9416559b8c4e31015c061d", null ],
+    [ "pessoas", "classCSCartao.html#a74774f205492a05bd869cbb7be2d61f3", null ],
+    [ "projetos", "classCSCartao.html#ac564c9d3ef94ffa65ea341b363bbc42d", null ],
+    [ "quadros", "classCSCartao.html#a7af63dcf14a08d9724c0618068bf9550", null ],
+    [ "sessao", "classCSCartao.html#a44ea1862cbfbcf7362ee9c423ad63105", null ]
+];

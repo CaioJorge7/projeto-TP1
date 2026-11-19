@@ -5,7 +5,7 @@ Sistema: Gestão de Projetos Kanban em C++
 ====================================================================
 
 1. MEMBRO 1 - Camada de Domínios
-   - Nome Completo: Caio Jorge Soares
+   - Nome Completo: Caio Jorge Soares Viana Jardim
    - Matrícula: 221003921
    - Artefatos produzidos:
      * Classes de domínio e validações de formato (include/dominios.h, src/dominios.cpp)

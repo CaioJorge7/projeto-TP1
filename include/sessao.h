@@ -27,7 +27,9 @@
  */
 class Sessao {
 private:
+    /** @brief Indica se existe um usuario autenticado no momento. */
     bool ativa;
+    /** @brief Email do usuario autenticado no momento. */
     Email usuario;
 
 public:

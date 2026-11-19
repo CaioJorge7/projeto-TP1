@@ -1,0 +1,589 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Sistema Kanban - TP1: Referência da Classe Aplicacao</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Sistema Kanban - TP1<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Sistema de Gestao de Projetos Kanban em C++ (TP1 - Tecnicas de Programacao 1)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('classAplicacao.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Membros Públicos</a> &#124;
+<a href="#pri-methods">Membros privados</a> &#124;
+<a href="#pri-attribs">Atributos Privados</a> &#124;
+<a href="classAplicacao-members.html">Lista de todos os Membros</a>  </div>
+  <div class="headertitle"><div class="title">Referência da Classe Aplicacao</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Orquestrador principal da aplicacao.  
+ <a href="#details">Mais...</a></p>
+
+<p><code>#include &lt;<a class="el" href="apresentacao_8h_source.html">apresentacao.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Membros Públicos</h2></td></tr>
+<tr class="memitem:a57c342de244970a6cbd48b76fd516e43" id="r_a57c342de244970a6cbd48b76fd516e43"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a57c342de244970a6cbd48b76fd516e43">Aplicacao</a> (<a class="el" href="classIServicoAutenticacao.html">IServicoAutenticacao</a> *sa, <a class="el" href="classIServicoPessoa.html">IServicoPessoa</a> *sp, <a class="el" href="classIServicoProjeto.html">IServicoProjeto</a> *spj, <a class="el" href="classIServicoQuadro.html">IServicoQuadro</a> *sq, <a class="el" href="classIServicoCartaoAtividade.html">IServicoCartaoAtividade</a> *sc, std::function&lt; void()&gt; <a class="el" href="#aba3b34647d5eda09671f994d3e7e9776">fnLogout</a>)</td></tr>
+<tr class="memdesc:a57c342de244970a6cbd48b76fd516e43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constroi o orquestrador.  <br /></td></tr>
+<tr class="separator:a57c342de244970a6cbd48b76fd516e43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e333e31239f0a15d6c4a51644f94aa0" id="r_a3e333e31239f0a15d6c4a51644f94aa0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3e333e31239f0a15d6c4a51644f94aa0">executar</a> ()</td></tr>
+<tr class="memdesc:a3e333e31239f0a15d6c4a51644f94aa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inicia o loop principal da aplicacao.  <br /></td></tr>
+<tr class="separator:a3e333e31239f0a15d6c4a51644f94aa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Membros privados</h2></td></tr>
+<tr class="memitem:a9eaa7a684ded361e691f255edbf0d342" id="r_a9eaa7a684ded361e691f255edbf0d342"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9eaa7a684ded361e691f255edbf0d342">menuInicial</a> ()</td></tr>
+<tr class="memdesc:a9eaa7a684ded361e691f255edbf0d342"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exibe o menu inicial (nao autenticado) em loop.  <br /></td></tr>
+<tr class="separator:a9eaa7a684ded361e691f255edbf0d342"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad607578df56e29989c4a08721ecc4c58" id="r_ad607578df56e29989c4a08721ecc4c58"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad607578df56e29989c4a08721ecc4c58">menuPrincipal</a> ()</td></tr>
+<tr class="memdesc:ad607578df56e29989c4a08721ecc4c58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exibe o menu principal (autenticado) em loop.  <br /></td></tr>
+<tr class="separator:ad607578df56e29989c4a08721ecc4c58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac69b9f137687579c24eb69edd4826ea7" id="r_ac69b9f137687579c24eb69edd4826ea7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac69b9f137687579c24eb69edd4826ea7">criarConta</a> ()</td></tr>
+<tr class="memdesc:ac69b9f137687579c24eb69edd4826ea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fluxo de criacao de conta a partir do menu inicial.  <br /></td></tr>
+<tr class="separator:ac69b9f137687579c24eb69edd4826ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac33a7e26dc494ec6b6adfe3bf4d58fe7" id="r_ac33a7e26dc494ec6b6adfe3bf4d58fe7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac33a7e26dc494ec6b6adfe3bf4d58fe7">autenticar</a> ()</td></tr>
+<tr class="memdesc:ac33a7e26dc494ec6b6adfe3bf4d58fe7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fluxo de autenticacao (login).  <br /></td></tr>
+<tr class="separator:ac33a7e26dc494ec6b6adfe3bf4d58fe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f4675063efc8aeeabc78c6ca20f338c" id="r_a7f4675063efc8aeeabc78c6ca20f338c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7f4675063efc8aeeabc78c6ca20f338c">logout</a> ()</td></tr>
+<tr class="memdesc:a7f4675063efc8aeeabc78c6ca20f338c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Realiza o logout: invoca fnLogout e define autenticado = false.  <br /></td></tr>
+<tr class="separator:a7f4675063efc8aeeabc78c6ca20f338c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Atributos Privados</h2></td></tr>
+<tr class="memitem:a568663c08c0a8d707c21148b4873ef14" id="r_a568663c08c0a8d707c21148b4873ef14"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classIServicoAutenticacao.html">IServicoAutenticacao</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a568663c08c0a8d707c21148b4873ef14">sAuth</a></td></tr>
+<tr class="memdesc:a568663c08c0a8d707c21148b4873ef14"><td class="mdescLeft">&#160;</td><td class="mdescRight">Servico de autenticacao (login).  <br /></td></tr>
+<tr class="separator:a568663c08c0a8d707c21148b4873ef14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a397e67955113b26fa20d786c9a61f47b" id="r_a397e67955113b26fa20d786c9a61f47b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classIServicoPessoa.html">IServicoPessoa</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a397e67955113b26fa20d786c9a61f47b">sPessoa</a></td></tr>
+<tr class="memdesc:a397e67955113b26fa20d786c9a61f47b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Servico de <a class="el" href="classPessoa.html" title="Usuario do sistema, que atua como GESTOR ou DESENVOLVEDOR.">Pessoa</a> (usado em criarConta).  <br /></td></tr>
+<tr class="separator:a397e67955113b26fa20d786c9a61f47b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81a0544d51be1157013904a52effb794" id="r_a81a0544d51be1157013904a52effb794"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classApresentacaoPessoa.html">ApresentacaoPessoa</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81a0544d51be1157013904a52effb794">apPessoa</a></td></tr>
+<tr class="memdesc:a81a0544d51be1157013904a52effb794"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sub-controladora de <a class="el" href="classPessoa.html" title="Usuario do sistema, que atua como GESTOR ou DESENVOLVEDOR.">Pessoa</a>.  <br /></td></tr>
+<tr class="separator:a81a0544d51be1157013904a52effb794"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27dcc2920494e736c40760f4ccc4c4a5" id="r_a27dcc2920494e736c40760f4ccc4c4a5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classApresentacaoProjeto.html">ApresentacaoProjeto</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a27dcc2920494e736c40760f4ccc4c4a5">apProjeto</a></td></tr>
+<tr class="memdesc:a27dcc2920494e736c40760f4ccc4c4a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sub-controladora de <a class="el" href="classProjeto.html" title="Projeto sob responsabilidade de exatamente um gestor (Pessoa).">Projeto</a>.  <br /></td></tr>
+<tr class="separator:a27dcc2920494e736c40760f4ccc4c4a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c9d9e990673516ea9eb2feac9f0ceae" id="r_a2c9d9e990673516ea9eb2feac9f0ceae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classApresentacaoQuadro.html">ApresentacaoQuadro</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c9d9e990673516ea9eb2feac9f0ceae">apQuadro</a></td></tr>
+<tr class="memdesc:a2c9d9e990673516ea9eb2feac9f0ceae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sub-controladora de <a class="el" href="classQuadro.html" title="Quadro Kanban pertencente a exatamente um Projeto.">Quadro</a>.  <br /></td></tr>
+<tr class="separator:a2c9d9e990673516ea9eb2feac9f0ceae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a204a60bf0de53b4bc60cd66dbc4e0809" id="r_a204a60bf0de53b4bc60cd66dbc4e0809"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classApresentacaoCartao.html">ApresentacaoCartao</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a204a60bf0de53b4bc60cd66dbc4e0809">apCartao</a></td></tr>
+<tr class="memdesc:a204a60bf0de53b4bc60cd66dbc4e0809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sub-controladora de Cartao.  <br /></td></tr>
+<tr class="separator:a204a60bf0de53b4bc60cd66dbc4e0809"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba3b34647d5eda09671f994d3e7e9776" id="r_aba3b34647d5eda09671f994d3e7e9776"><td class="memItemLeft" align="right" valign="top">std::function&lt; void()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba3b34647d5eda09671f994d3e7e9776">fnLogout</a></td></tr>
+<tr class="memdesc:aba3b34647d5eda09671f994d3e7e9776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback de logout injetado por <a class="el" href="main_8cpp.html" title="Ponto de entrada do sistema Kanban - TP1.">main.cpp</a>.  <br /></td></tr>
+<tr class="separator:aba3b34647d5eda09671f994d3e7e9776"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6326befed4ed0637dedbbc91e2258825" id="r_a6326befed4ed0637dedbbc91e2258825"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6326befed4ed0637dedbbc91e2258825">autenticado</a></td></tr>
+<tr class="memdesc:a6326befed4ed0637dedbbc91e2258825"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classEstado.html" title="Representa o estado de um cartão de atividade no quadro Kanban.">Estado</a> local: ha usuario autenticado?  <br /></td></tr>
+<tr class="separator:a6326befed4ed0637dedbbc91e2258825"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Orquestrador principal da aplicacao. </p>
+<p>Gerencia os menus raiz (inicial e principal) e delega as operacoes especificas de cada entidade para as sub-controladoras de apresentacao.</p>
+<p>Desacoplamento do logout: <a class="el" href="classIServicoAutenticacao.html" title="Contrato de autenticacao; requisito preliminar ao acesso.">IServicoAutenticacao</a> nao expoe encerrarSessao(). Por isso, o <a class="el" href="main_8cpp.html" title="Ponto de entrada do sistema Kanban - TP1.">main.cpp</a> injeta um std::function&lt;void()&gt; (callback) que chama <a class="el" href="classCSAutenticacao.html#a8956f407d49c22b67469b691af8a6212" title="Encerra a sessao (logout).">CSAutenticacao::encerrarSessao()</a> de forma desacoplada, mantendo a camada de apresentacao livre de qualquer dependencia de CS*. </p>
+</div><h2 class="groupheader">Construtores e Destrutores</h2>
+<a id="a57c342de244970a6cbd48b76fd516e43" name="a57c342de244970a6cbd48b76fd516e43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57c342de244970a6cbd48b76fd516e43">&#9670;&#160;</a></span>Aplicacao()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Aplicacao::Aplicacao </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classIServicoAutenticacao.html">IServicoAutenticacao</a> *</td>          <td class="paramname"><span class="paramname"><em>sa</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classIServicoPessoa.html">IServicoPessoa</a> *</td>          <td class="paramname"><span class="paramname"><em>sp</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classIServicoProjeto.html">IServicoProjeto</a> *</td>          <td class="paramname"><span class="paramname"><em>spj</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classIServicoQuadro.html">IServicoQuadro</a> *</td>          <td class="paramname"><span class="paramname"><em>sq</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classIServicoCartaoAtividade.html">IServicoCartaoAtividade</a> *</td>          <td class="paramname"><span class="paramname"><em>sc</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void()&gt;</td>          <td class="paramname"><span class="paramname"><em>fnLogout</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constroi o orquestrador. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sa</td><td>Servico de autenticacao. </td></tr>
+    <tr><td class="paramname">sp</td><td>Servico de <a class="el" href="classPessoa.html" title="Usuario do sistema, que atua como GESTOR ou DESENVOLVEDOR.">Pessoa</a> (tambem passado para apPessoa). </td></tr>
+    <tr><td class="paramname">spj</td><td>Servico de <a class="el" href="classProjeto.html" title="Projeto sob responsabilidade de exatamente um gestor (Pessoa).">Projeto</a>. </td></tr>
+    <tr><td class="paramname">sq</td><td>Servico de <a class="el" href="classQuadro.html" title="Quadro Kanban pertencente a exatamente um Projeto.">Quadro</a>. </td></tr>
+    <tr><td class="paramname">sc</td><td>Servico de Cartao. </td></tr>
+    <tr><td class="paramname">fnLogout</td><td>Callback que encerra a sessao na camada de servico. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Documentação das funções</h2>
+<a id="ac33a7e26dc494ec6b6adfe3bf4d58fe7" name="ac33a7e26dc494ec6b6adfe3bf4d58fe7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac33a7e26dc494ec6b6adfe3bf4d58fe7">&#9670;&#160;</a></span>autenticar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Aplicacao::autenticar </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fluxo de autenticacao (login). </p>
+<p>Chama <a class="el" href="classIServicoAutenticacao.html#aad7a9748c8acddb2f5739b730ab8e91c" title="Autentica usuario por email e senha.">IServicoAutenticacao::autenticar</a> e, em caso de sucesso, define autenticado = true. </p>
+
+</div>
+</div>
+<a id="ac69b9f137687579c24eb69edd4826ea7" name="ac69b9f137687579c24eb69edd4826ea7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac69b9f137687579c24eb69edd4826ea7">&#9670;&#160;</a></span>criarConta()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Aplicacao::criarConta </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Fluxo de criacao de conta a partir do menu inicial. </p>
+<p>Reutiliza <a class="el" href="classIServicoPessoa.html#a09164c5a2223650905e561adc7e01236" title="Cria pessoa; exige email nao cadastrado.">IServicoPessoa::criar</a>, que nao exige autenticacao. </p>
+
+</div>
+</div>
+<a id="a3e333e31239f0a15d6c4a51644f94aa0" name="a3e333e31239f0a15d6c4a51644f94aa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e333e31239f0a15d6c4a51644f94aa0">&#9670;&#160;</a></span>executar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Aplicacao::executar </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Inicia o loop principal da aplicacao. </p>
+<p>Alterna entre menuInicial e menuPrincipal enquanto o usuario nao escolher Sair no menu inicial. </p>
+
+</div>
+</div>
+<a id="a7f4675063efc8aeeabc78c6ca20f338c" name="a7f4675063efc8aeeabc78c6ca20f338c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f4675063efc8aeeabc78c6ca20f338c">&#9670;&#160;</a></span>logout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Aplicacao::logout </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Realiza o logout: invoca fnLogout e define autenticado = false. </p>
+
+</div>
+</div>
+<a id="a9eaa7a684ded361e691f255edbf0d342" name="a9eaa7a684ded361e691f255edbf0d342"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9eaa7a684ded361e691f255edbf0d342">&#9670;&#160;</a></span>menuInicial()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Aplicacao::menuInicial </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Exibe o menu inicial (nao autenticado) em loop. </p>
+<p>Retorna quando o usuario faz login (autenticado passa a true) ou escolhe sair (autenticado permanece false). </p>
+
+</div>
+</div>
+<a id="ad607578df56e29989c4a08721ecc4c58" name="ad607578df56e29989c4a08721ecc4c58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad607578df56e29989c4a08721ecc4c58">&#9670;&#160;</a></span>menuPrincipal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Aplicacao::menuPrincipal </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Exibe o menu principal (autenticado) em loop. </p>
+<p>Retorna quando o usuario faz logout (autenticado passa a false). </p>
+
+</div>
+</div>
+<h2 class="groupheader">Atributos</h2>
+<a id="a204a60bf0de53b4bc60cd66dbc4e0809" name="a204a60bf0de53b4bc60cd66dbc4e0809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a204a60bf0de53b4bc60cd66dbc4e0809">&#9670;&#160;</a></span>apCartao</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classApresentacaoCartao.html">ApresentacaoCartao</a> Aplicacao::apCartao</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sub-controladora de Cartao. </p>
+
+</div>
+</div>
+<a id="a81a0544d51be1157013904a52effb794" name="a81a0544d51be1157013904a52effb794"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81a0544d51be1157013904a52effb794">&#9670;&#160;</a></span>apPessoa</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classApresentacaoPessoa.html">ApresentacaoPessoa</a> Aplicacao::apPessoa</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sub-controladora de <a class="el" href="classPessoa.html" title="Usuario do sistema, que atua como GESTOR ou DESENVOLVEDOR.">Pessoa</a>. </p>
+
+</div>
+</div>
+<a id="a27dcc2920494e736c40760f4ccc4c4a5" name="a27dcc2920494e736c40760f4ccc4c4a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27dcc2920494e736c40760f4ccc4c4a5">&#9670;&#160;</a></span>apProjeto</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classApresentacaoProjeto.html">ApresentacaoProjeto</a> Aplicacao::apProjeto</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sub-controladora de <a class="el" href="classProjeto.html" title="Projeto sob responsabilidade de exatamente um gestor (Pessoa).">Projeto</a>. </p>
+
+</div>
+</div>
+<a id="a2c9d9e990673516ea9eb2feac9f0ceae" name="a2c9d9e990673516ea9eb2feac9f0ceae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c9d9e990673516ea9eb2feac9f0ceae">&#9670;&#160;</a></span>apQuadro</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classApresentacaoQuadro.html">ApresentacaoQuadro</a> Aplicacao::apQuadro</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sub-controladora de <a class="el" href="classQuadro.html" title="Quadro Kanban pertencente a exatamente um Projeto.">Quadro</a>. </p>
+
+</div>
+</div>
+<a id="a6326befed4ed0637dedbbc91e2258825" name="a6326befed4ed0637dedbbc91e2258825"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6326befed4ed0637dedbbc91e2258825">&#9670;&#160;</a></span>autenticado</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Aplicacao::autenticado</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classEstado.html" title="Representa o estado de um cartão de atividade no quadro Kanban.">Estado</a> local: ha usuario autenticado? </p>
+
+</div>
+</div>
+<a id="aba3b34647d5eda09671f994d3e7e9776" name="aba3b34647d5eda09671f994d3e7e9776"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba3b34647d5eda09671f994d3e7e9776">&#9670;&#160;</a></span>fnLogout</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::function&lt;void()&gt; Aplicacao::fnLogout</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback de logout injetado por <a class="el" href="main_8cpp.html" title="Ponto de entrada do sistema Kanban - TP1.">main.cpp</a>. </p>
+
+</div>
+</div>
+<a id="a568663c08c0a8d707c21148b4873ef14" name="a568663c08c0a8d707c21148b4873ef14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a568663c08c0a8d707c21148b4873ef14">&#9670;&#160;</a></span>sAuth</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classIServicoAutenticacao.html">IServicoAutenticacao</a>* Aplicacao::sAuth</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Servico de autenticacao (login). </p>
+
+</div>
+</div>
+<a id="a397e67955113b26fa20d786c9a61f47b" name="a397e67955113b26fa20d786c9a61f47b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a397e67955113b26fa20d786c9a61f47b">&#9670;&#160;</a></span>sPessoa</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classIServicoPessoa.html">IServicoPessoa</a>* Aplicacao::sPessoa</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Servico de <a class="el" href="classPessoa.html" title="Usuario do sistema, que atua como GESTOR ou DESENVOLVEDOR.">Pessoa</a> (usado em criarConta). </p>
+
+</div>
+</div>
+<hr/>A documentação para essa classe foi gerada a partir dos seguintes arquivos:<ul>
+<li>include/<a class="el" href="apresentacao_8h_source.html">apresentacao.h</a></li>
+<li>src/<a class="el" href="apresentacao_8cpp.html">apresentacao.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classAplicacao.html">Aplicacao</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,3 +1,8 @@
+/**
+ * @file dominios.cpp
+ * @brief Implementacao dos metodos de validacao e atribuicao dos dominios do sistema.
+ */
+
 #include "dominios.h"
 #include <cctype>
 #include <vector>

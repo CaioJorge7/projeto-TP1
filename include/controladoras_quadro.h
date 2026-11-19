@@ -19,13 +19,23 @@
  */
 class CSQuadro : public IServicoQuadro {
 private:
+    /** @brief Ponteiro para o conteiner de pessoas. */
     ContainerPessoas* pessoas;
+    /** @brief Ponteiro para o conteiner de projetos. */
     ContainerProjetos* projetos;
+    /** @brief Ponteiro para o conteiner de quadros. */
     ContainerQuadros* quadros;
+    /** @brief Ponteiro para o conteiner de cartoes. */
     ContainerCartoes* cartoes;
+    /** @brief Ponteiro para a sessao compartilhada. */
     Sessao* sessao;
 
-    // Confere se o projeto existe e se o usuario e o gestor dele.
+    /**
+     * @brief Confere se o projeto existe e se o usuario e o gestor dele.
+     * @param usuario Pessoa autenticada.
+     * @param idProjeto Identificador do projeto.
+     * @throw std::logic_error Se o projeto nao existe ou usuario nao e o gestor.
+     */
     void exigirGestorDoProjeto(const Pessoa& usuario, const Identificador& idProjeto) const {
         const Projeto* projeto = projetos->pesquisar(idProjeto);
         if (projeto == nullptr) {
@@ -36,7 +46,12 @@ private:
         }
     }
 
-    // Devolve o quadro se ele existe.
+    /**
+     * @brief Devolve o quadro caso exista.
+     * @param id Identificador do quadro.
+     * @return Referencia constante para o quadro.
+     * @throw std::logic_error Se o quadro nao existe.
+     */
     const Quadro& exigirQuadro(const Identificador& id) const {
         const Quadro* quadro = quadros->pesquisar(id);
         if (quadro == nullptr) {

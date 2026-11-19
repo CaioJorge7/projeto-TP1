@@ -19,12 +19,22 @@
  */
 class CSProjeto : public IServicoProjeto {
 private:
+    /** @brief Ponteiro para o conteiner de pessoas. */
     ContainerPessoas* pessoas;
+    /** @brief Ponteiro para o conteiner de projetos. */
     ContainerProjetos* projetos;
+    /** @brief Ponteiro para o conteiner de quadros. */
     ContainerQuadros* quadros;
+    /** @brief Ponteiro para a sessao compartilhada. */
     Sessao* sessao;
 
-    // Devolve o projeto se ele existe e o usuario e o gestor dele.
+    /**
+     * @brief Devolve o projeto se ele existe e o usuario autenticado e o gestor dele.
+     * @param usuario Pessoa autenticada.
+     * @param id Identificador do projeto.
+     * @return Referencia constante para o projeto.
+     * @throw std::logic_error Se o projeto nao existe ou se o usuario nao e o gestor.
+     */
     const Projeto& exigirProjetoDoGestor(const Pessoa& usuario, const Identificador& id) const {
         const Projeto* projeto = projetos->pesquisar(id);
         if (projeto == nullptr) {

@@ -34,6 +34,7 @@
  */
 class ContainerPessoas {
 private:
+    /** @brief Mapa de pessoas indexado pela string do email. */
     map<string, Pessoa> pessoas;
 
 public:
@@ -94,6 +95,7 @@ public:
  */
 class ContainerProjetos {
 private:
+    /** @brief Mapa de projetos indexado pela string do identificador. */
     map<string, Projeto> projetos;
 
 public:
@@ -166,6 +168,7 @@ public:
  */
 class ContainerQuadros {
 private:
+    /** @brief Mapa de quadros indexado pela string do identificador. */
     map<string, Quadro> quadros;
 
 public:
@@ -238,6 +241,7 @@ public:
  */
 class ContainerCartoes {
 private:
+    /** @brief Mapa de cartoes indexado pela string do identificador. */
     map<string, CartaoAtividade> cartoes;
 
 public:

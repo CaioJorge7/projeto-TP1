@@ -1,6 +1,11 @@
 #ifndef TEMPO_H_INCLUDED
 #define TEMPO_H_INCLUDED
 
+/**
+ * @file tempo.h
+ * @brief Utilitarios para calculo de tempo e conversao de Timestamp em minutos.
+ */
+
 #include <sstream>
 #include <string>
 #include <vector>

@@ -17,6 +17,7 @@
 /** @brief Contrato dos 5 servicos CRUD de Pessoa. */
 class IServicoPessoa {
 public:
+    /** @brief Destrutor virtual padrao. */
     virtual ~IServicoPessoa() {}
     /** @brief Cria pessoa; exige email nao cadastrado. */
     virtual void criar(const Pessoa& pessoa) = 0;
@@ -33,6 +34,7 @@ public:
 /** @brief Contrato de autenticacao; requisito preliminar ao acesso. */
 class IServicoAutenticacao {
 public:
+    /** @brief Destrutor virtual padrao. */
     virtual ~IServicoAutenticacao() {}
     /** @brief Autentica usuario por email e senha. */
     virtual bool autenticar(const Email& email, const Senha& senha) const = 0;
@@ -41,6 +43,7 @@ public:
 /** @brief Contrato dos 5 servicos CRUD de Projeto. */
 class IServicoProjeto {
 public:
+    /** @brief Destrutor virtual padrao. */
     virtual ~IServicoProjeto() {}
     /** @brief Cria projeto associado a Pessoa gestora existente. */
     virtual void criar(const Projeto& projeto) = 0;
@@ -57,6 +60,7 @@ public:
 /** @brief Contrato dos 5 servicos CRUD de Quadro. */
 class IServicoQuadro {
 public:
+    /** @brief Destrutor virtual padrao. */
     virtual ~IServicoQuadro() {}
     /** @brief Cria quadro de projeto existente. */
     virtual void criar(const Quadro& quadro) = 0;
@@ -78,6 +82,7 @@ public:
  */
 class IServicoCartaoAtividade {
 public:
+    /** @brief Destrutor virtual padrao. */
     virtual ~IServicoCartaoAtividade() {}
     /** @brief Cria cartao em quadro existente com desenvolvedor existente. */
     virtual void criar(const CartaoAtividade& cartao) = 0;

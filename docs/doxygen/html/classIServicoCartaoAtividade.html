@@ -1,0 +1,542 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Sistema Kanban - TP1: Referência da Classe IServicoCartaoAtividade</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Sistema Kanban - TP1<span id="projectnumber">&#160;1.0</span>
+   </div>
+   <div id="projectbrief">Sistema de Gestao de Projetos Kanban em C++ (TP1 - Tecnicas de Programacao 1)</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Gerado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Busca');
+  $(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('classIServicoCartaoAtividade.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Carregando...</div>
+<div class="SRStatus" id="Searching">Procurando...</div>
+<div class="SRStatus" id="NoMatches">Nenhuma entrada encontrado</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Membros Públicos</a> &#124;
+<a href="classIServicoCartaoAtividade-members.html">Lista de todos os Membros</a>  </div>
+  <div class="headertitle"><div class="title">Referência da Classe IServicoCartaoAtividade<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Contrato dos 11 servicos de Cartao: CRUD, mover, metricas e WIP.  
+ <a href="#details">Mais...</a></p>
+
+<p><code>#include &lt;<a class="el" href="interfaces_8h_source.html">interfaces.h</a>&gt;</code></p>
+<div class="dynheader">
+Diagrama de hierarquia da classe IServicoCartaoAtividade:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classIServicoCartaoAtividade.png" usemap="#IServicoCartaoAtividade_map" alt=""/>
+  <map id="IServicoCartaoAtividade_map" name="IServicoCartaoAtividade_map">
+<area href="classCSCartao.html" title="Controladora dos servicos 16 a 26 (CRUD, listagem, movimentacao e metricas de Cartao de atividade)." alt="CSCartao" shape="rect" coords="0,56,150,80"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Membros Públicos</h2></td></tr>
+<tr class="memitem:a92ba374a6a5957a7eb3e901ea4ccfa40" id="r_a92ba374a6a5957a7eb3e901ea4ccfa40"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92ba374a6a5957a7eb3e901ea4ccfa40">~IServicoCartaoAtividade</a> ()</td></tr>
+<tr class="memdesc:a92ba374a6a5957a7eb3e901ea4ccfa40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destrutor virtual padrao.  <br /></td></tr>
+<tr class="separator:a92ba374a6a5957a7eb3e901ea4ccfa40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f58db51a5648c409a924871369b4c75" id="r_a3f58db51a5648c409a924871369b4c75"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3f58db51a5648c409a924871369b4c75">criar</a> (const <a class="el" href="classCartaoAtividade.html">CartaoAtividade</a> &amp;cartao)=0</td></tr>
+<tr class="memdesc:a3f58db51a5648c409a924871369b4c75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cria cartao em quadro existente com desenvolvedor existente.  <br /></td></tr>
+<tr class="separator:a3f58db51a5648c409a924871369b4c75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a836784c85e460042c09407671f3ef2ac" id="r_a836784c85e460042c09407671f3ef2ac"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classCartaoAtividade.html">CartaoAtividade</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a836784c85e460042c09407671f3ef2ac">ler</a> (const <a class="el" href="classIdentificador.html">Identificador</a> &amp;identificador) const =0</td></tr>
+<tr class="memdesc:a836784c85e460042c09407671f3ef2ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consulta cartao por identificador.  <br /></td></tr>
+<tr class="separator:a836784c85e460042c09407671f3ef2ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4953b9a12db29a8b169cfe7b8d0750cf" id="r_a4953b9a12db29a8b169cfe7b8d0750cf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4953b9a12db29a8b169cfe7b8d0750cf">atualizar</a> (const <a class="el" href="classCartaoAtividade.html">CartaoAtividade</a> &amp;cartao)=0</td></tr>
+<tr class="memdesc:a4953b9a12db29a8b169cfe7b8d0750cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Atualiza dados sem modificar sua chave primaria.  <br /></td></tr>
+<tr class="separator:a4953b9a12db29a8b169cfe7b8d0750cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5862d36bea3bf5f199710d00733e3991" id="r_a5862d36bea3bf5f199710d00733e3991"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5862d36bea3bf5f199710d00733e3991">excluir</a> (const <a class="el" href="classIdentificador.html">Identificador</a> &amp;identificador)=0</td></tr>
+<tr class="memdesc:a5862d36bea3bf5f199710d00733e3991"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exclui cartao sem inconsistencia.  <br /></td></tr>
+<tr class="separator:a5862d36bea3bf5f199710d00733e3991"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a465982dc2edf8537f06e2f723013a8f7" id="r_a465982dc2edf8537f06e2f723013a8f7"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="classCartaoAtividade.html">CartaoAtividade</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a465982dc2edf8537f06e2f723013a8f7">listar</a> () const =0</td></tr>
+<tr class="memdesc:a465982dc2edf8537f06e2f723013a8f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lista cartoes registrados.  <br /></td></tr>
+<tr class="separator:a465982dc2edf8537f06e2f723013a8f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a358845b30d73c8214d5ba3b82bec9347" id="r_a358845b30d73c8214d5ba3b82bec9347"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a358845b30d73c8214d5ba3b82bec9347">mover</a> (const <a class="el" href="classIdentificador.html">Identificador</a> &amp;idCartao, const <a class="el" href="classEstado.html">Estado</a> &amp;novoEstado, const <a class="el" href="classTimestamp.html">Timestamp</a> &amp;instante)=0</td></tr>
+<tr class="memdesc:a358845b30d73c8214d5ba3b82bec9347"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move cartao de A FAZER a FAZENDO ou FAZENDO a FEITO.  <br /></td></tr>
+<tr class="separator:a358845b30d73c8214d5ba3b82bec9347"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c0fa915ddffb6c6a0fa8d9f4f5fa9a8" id="r_a8c0fa915ddffb6c6a0fa8d9f4f5fa9a8"><td class="memItemLeft" align="right" valign="top">virtual long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c0fa915ddffb6c6a0fa8d9f4f5fa9a8">lerTempoCiclo</a> (const <a class="el" href="classIdentificador.html">Identificador</a> &amp;idCartao) const =0</td></tr>
+<tr class="memdesc:a8c0fa915ddffb6c6a0fa8d9f4f5fa9a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cycle Time = termino - inicio, em minutos.  <br /></td></tr>
+<tr class="separator:a8c0fa915ddffb6c6a0fa8d9f4f5fa9a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79bc24f5c996bf01cd2c417237e6b1c1" id="r_a79bc24f5c996bf01cd2c417237e6b1c1"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79bc24f5c996bf01cd2c417237e6b1c1">lerTempoCicloMedio</a> (const <a class="el" href="classIdentificador.html">Identificador</a> &amp;idQuadro) const =0</td></tr>
+<tr class="memdesc:a79bc24f5c996bf01cd2c417237e6b1c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Media dos cycle times concluidos, em minutos.  <br /></td></tr>
+<tr class="separator:a79bc24f5c996bf01cd2c417237e6b1c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f5d276d021871d0a4801f073cda3274" id="r_a4f5d276d021871d0a4801f073cda3274"><td class="memItemLeft" align="right" valign="top">virtual long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4f5d276d021871d0a4801f073cda3274">lerLeadTime</a> (const <a class="el" href="classIdentificador.html">Identificador</a> &amp;idCartao) const =0</td></tr>
+<tr class="memdesc:a4f5d276d021871d0a4801f073cda3274"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lead Time = termino - entrada, em minutos.  <br /></td></tr>
+<tr class="separator:a4f5d276d021871d0a4801f073cda3274"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8aaf7b35567b8b9a031a3d4a3bb14469" id="r_a8aaf7b35567b8b9a031a3d4a3bb14469"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8aaf7b35567b8b9a031a3d4a3bb14469">lerLeadTimeMedio</a> (const <a class="el" href="classIdentificador.html">Identificador</a> &amp;idQuadro) const =0</td></tr>
+<tr class="memdesc:a8aaf7b35567b8b9a031a3d4a3bb14469"><td class="mdescLeft">&#160;</td><td class="mdescRight">Media dos lead times concluidos, em minutos.  <br /></td></tr>
+<tr class="separator:a8aaf7b35567b8b9a031a3d4a3bb14469"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55069cec658f0c151f92ae42910fa133" id="r_a55069cec658f0c151f92ae42910fa133"><td class="memItemLeft" align="right" valign="top">virtual unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55069cec658f0c151f92ae42910fa133">lerWip</a> (const <a class="el" href="classIdentificador.html">Identificador</a> &amp;idQuadro) const =0</td></tr>
+<tr class="memdesc:a55069cec658f0c151f92ae42910fa133"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contagem atual de cartoes em FAZENDO no quadro.  <br /></td></tr>
+<tr class="separator:a55069cec658f0c151f92ae42910fa133"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrição detalhada</h2>
+<div class="textblock"><p>Contrato dos 11 servicos de Cartao: CRUD, mover, metricas e WIP. </p>
+<p>Prazos de cycle time e lead time serao expressos em minutos. A especificacao define os intervalos, mas nao a unidade; o minuto e convencao de interface proposta aqui e pode ser ajustado em equipe. </p>
+</div><h2 class="groupheader">Construtores e Destrutores</h2>
+<a id="a92ba374a6a5957a7eb3e901ea4ccfa40" name="a92ba374a6a5957a7eb3e901ea4ccfa40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92ba374a6a5957a7eb3e901ea4ccfa40">&#9670;&#160;</a></span>~IServicoCartaoAtividade()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual IServicoCartaoAtividade::~IServicoCartaoAtividade </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destrutor virtual padrao. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentação das funções</h2>
+<a id="a4953b9a12db29a8b169cfe7b8d0750cf" name="a4953b9a12db29a8b169cfe7b8d0750cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4953b9a12db29a8b169cfe7b8d0750cf">&#9670;&#160;</a></span>atualizar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void IServicoCartaoAtividade::atualizar </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classCartaoAtividade.html">CartaoAtividade</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>cartao</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Atualiza dados sem modificar sua chave primaria. </p>
+
+<p>Implementado por <a class="el" href="classCSCartao.html#a7305bb59d0db92d8064c8d3f9abae24a">CSCartao</a>.</p>
+
+</div>
+</div>
+<a id="a3f58db51a5648c409a924871369b4c75" name="a3f58db51a5648c409a924871369b4c75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f58db51a5648c409a924871369b4c75">&#9670;&#160;</a></span>criar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void IServicoCartaoAtividade::criar </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classCartaoAtividade.html">CartaoAtividade</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>cartao</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Cria cartao em quadro existente com desenvolvedor existente. </p>
+
+<p>Implementado por <a class="el" href="classCSCartao.html#a3eb2cce4e7107cbd871c2a1b43260069">CSCartao</a>.</p>
+
+</div>
+</div>
+<a id="a5862d36bea3bf5f199710d00733e3991" name="a5862d36bea3bf5f199710d00733e3991"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5862d36bea3bf5f199710d00733e3991">&#9670;&#160;</a></span>excluir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void IServicoCartaoAtividade::excluir </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classIdentificador.html">Identificador</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>identificador</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Exclui cartao sem inconsistencia. </p>
+
+<p>Implementado por <a class="el" href="classCSCartao.html#a14f3a168323a9674e4f9f97003a0d0b7">CSCartao</a>.</p>
+
+</div>
+</div>
+<a id="a836784c85e460042c09407671f3ef2ac" name="a836784c85e460042c09407671f3ef2ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a836784c85e460042c09407671f3ef2ac">&#9670;&#160;</a></span>ler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classCartaoAtividade.html">CartaoAtividade</a> IServicoCartaoAtividade::ler </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classIdentificador.html">Identificador</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>identificador</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Consulta cartao por identificador. </p>
+
+<p>Implementado por <a class="el" href="classCSCartao.html#a99d49f80a0ef1de5042b0b0676fe903e">CSCartao</a>.</p>
+
+</div>
+</div>
+<a id="a4f5d276d021871d0a4801f073cda3274" name="a4f5d276d021871d0a4801f073cda3274"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f5d276d021871d0a4801f073cda3274">&#9670;&#160;</a></span>lerLeadTime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual long IServicoCartaoAtividade::lerLeadTime </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classIdentificador.html">Identificador</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>idCartao</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lead Time = termino - entrada, em minutos. </p>
+
+<p>Implementado por <a class="el" href="classCSCartao.html#a96d999aa817017d0eeafbebecbd548d9">CSCartao</a>.</p>
+
+</div>
+</div>
+<a id="a8aaf7b35567b8b9a031a3d4a3bb14469" name="a8aaf7b35567b8b9a031a3d4a3bb14469"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aaf7b35567b8b9a031a3d4a3bb14469">&#9670;&#160;</a></span>lerLeadTimeMedio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double IServicoCartaoAtividade::lerLeadTimeMedio </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classIdentificador.html">Identificador</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>idQuadro</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Media dos lead times concluidos, em minutos. </p>
+
+<p>Implementado por <a class="el" href="classCSCartao.html#a2f1cb902ca1e7b586ff43a89ce4f8034">CSCartao</a>.</p>
+
+</div>
+</div>
+<a id="a8c0fa915ddffb6c6a0fa8d9f4f5fa9a8" name="a8c0fa915ddffb6c6a0fa8d9f4f5fa9a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c0fa915ddffb6c6a0fa8d9f4f5fa9a8">&#9670;&#160;</a></span>lerTempoCiclo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual long IServicoCartaoAtividade::lerTempoCiclo </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classIdentificador.html">Identificador</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>idCartao</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Cycle Time = termino - inicio, em minutos. </p>
+
+<p>Implementado por <a class="el" href="classCSCartao.html#a3b861b639c2106ded77def63a002f9ea">CSCartao</a>.</p>
+
+</div>
+</div>
+<a id="a79bc24f5c996bf01cd2c417237e6b1c1" name="a79bc24f5c996bf01cd2c417237e6b1c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79bc24f5c996bf01cd2c417237e6b1c1">&#9670;&#160;</a></span>lerTempoCicloMedio()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual double IServicoCartaoAtividade::lerTempoCicloMedio </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classIdentificador.html">Identificador</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>idQuadro</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Media dos cycle times concluidos, em minutos. </p>
+
+<p>Implementado por <a class="el" href="classCSCartao.html#a1332cf7021db84ca997b79acd4676a5c">CSCartao</a>.</p>
+
+</div>
+</div>
+<a id="a55069cec658f0c151f92ae42910fa133" name="a55069cec658f0c151f92ae42910fa133"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55069cec658f0c151f92ae42910fa133">&#9670;&#160;</a></span>lerWip()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual unsigned int IServicoCartaoAtividade::lerWip </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classIdentificador.html">Identificador</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>idQuadro</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Contagem atual de cartoes em FAZENDO no quadro. </p>
+
+<p>Implementado por <a class="el" href="classCSCartao.html#a4fe05506a633acae7e3bf446794c968a">CSCartao</a>.</p>
+
+</div>
+</div>
+<a id="a465982dc2edf8537f06e2f723013a8f7" name="a465982dc2edf8537f06e2f723013a8f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a465982dc2edf8537f06e2f723013a8f7">&#9670;&#160;</a></span>listar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::vector&lt; <a class="el" href="classCartaoAtividade.html">CartaoAtividade</a> &gt; IServicoCartaoAtividade::listar </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lista cartoes registrados. </p>
+
+<p>Implementado por <a class="el" href="classCSCartao.html#ae9e4a12a29e4c8b2596b721b382d6a4b">CSCartao</a>.</p>
+
+</div>
+</div>
+<a id="a358845b30d73c8214d5ba3b82bec9347" name="a358845b30d73c8214d5ba3b82bec9347"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a358845b30d73c8214d5ba3b82bec9347">&#9670;&#160;</a></span>mover()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void IServicoCartaoAtividade::mover </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classIdentificador.html">Identificador</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>idCartao</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classEstado.html">Estado</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>novoEstado</em>, </span></td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classTimestamp.html">Timestamp</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>instante</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move cartao de A FAZER a FAZENDO ou FAZENDO a FEITO. </p>
+<dl class="params"><dt>Parâmetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idCartao</td><td>Chave primaria do cartao. </td></tr>
+    <tr><td class="paramname">novoEstado</td><td>Novo estado permitido. </td></tr>
+    <tr><td class="paramname">instante</td><td>Instante da mudanca; define inicio ou termino. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceções</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::logic_error</td><td>Se a transicao ou limite WIP for invalido. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implementado por <a class="el" href="classCSCartao.html#a910d290e093700b3398395976ecc759b">CSCartao</a>.</p>
+
+</div>
+</div>
+<hr/>A documentação para essa classe foi gerada a partir do seguinte arquivo:<ul>
+<li>include/<a class="el" href="interfaces_8h_source.html">interfaces.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="classIServicoCartaoAtividade.html">IServicoCartaoAtividade</a></li>
+    <li class="footer">Gerado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+  </ul>
+</div>
+</body>
+</html>

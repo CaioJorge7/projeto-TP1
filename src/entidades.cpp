@@ -1,9 +1,20 @@
+/**
+ * @file entidades.cpp
+ * @brief Implementacao dos construtores e metodos das entidades do sistema Kanban.
+ */
+
 #include "entidades.h"
 #include <stdexcept>
 
 // As chaves primarias nao podem ser alteradas apos a criacao da entidade.
 // A atribuicao de um mesmo valor e permitida, para compatibilidade com set/get.
 namespace {
+    /**
+     * @brief Garante que uma chave primaria nao seja alterada apos a construcao.
+     * @param atual Valor atual da chave.
+     * @param nova Novo valor pretendido.
+     * @throw std::logic_error Caso o novo valor seja diferente do atual.
+     */
     void exigirChaveInalterada(const std::string& atual, const std::string& nova) {
         if (atual != nova) {
             throw std::logic_error("Nao e permitido alterar uma chave primaria.");

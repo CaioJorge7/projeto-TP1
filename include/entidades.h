@@ -18,9 +18,13 @@
  */
 class Pessoa {
 private:
+    /** @brief E-mail da pessoa (chave primaria). */
     Email email;
+    /** @brief Nome completo da pessoa. */
     Nome nome;
+    /** @brief Senha de acesso. */
     Senha senha;
+    /** @brief Papel desempenhado no sistema (GESTOR ou DESENVOLVEDOR). */
     Papel papel;
 public:
     /** @brief Constroi uma pessoa a partir de dominios previamente validados. */
@@ -51,11 +55,17 @@ public:
  */
 class Projeto {
 private:
+    /** @brief Codigo identificador do projeto (chave primaria). */
     Identificador identificador;
+    /** @brief Nome do projeto. */
     Nome nome;
+    /** @brief Descricao textual dos objetivos do projeto. */
     Texto descricao;
+    /** @brief Data e horario de inicio planejado. */
     Timestamp inicio;
+    /** @brief Data e horario de termino planejado. */
     Timestamp termino;
+    /** @brief E-mail da pessoa gestora responsavel pelo projeto. */
     Email gestorEmail;
 public:
     /** @brief Constroi projeto com sua referencia de gestor. */
@@ -95,9 +105,13 @@ public:
  */
 class Quadro {
 private:
+    /** @brief Codigo identificador do quadro (chave primaria). */
     Identificador identificador;
+    /** @brief Nome do quadro. */
     Nome nome;
+    /** @brief Limite maximo de cartoes simultaneos em FAZENDO (WIP). */
     Limite limite;
+    /** @brief Identificador do projeto ao qual o quadro pertence. */
     Identificador projetoId;
 public:
     /** @brief Constroi um quadro associado a um projeto. */
@@ -131,16 +145,27 @@ public:
  */
 class CartaoAtividade {
 private:
+    /** @brief Codigo identificador do cartao (chave primaria). */
     Identificador identificador;
+    /** @brief Nome descritivo da atividade. */
     Nome nome;
+    /** @brief Detalhamento textual da atividade. */
     Texto descricao;
+    /** @brief Prioridade da atividade (ALTA, MEDIA ou BAIXA). */
     Prioridade prioridade;
+    /** @brief Estado no fluxo Kanban (A FAZER, FAZENDO ou FEITO). */
     Estado estado;
+    /** @brief Tamanho estimado da atividade (GRANDE, MEDIO ou PEQUENO). */
     Tamanho tamanho;
+    /** @brief Data e horario de criacao/entrada no quadro. */
     Timestamp entrada;
+    /** @brief Data e horario em que o trabalho foi iniciado. */
     Timestamp inicio;
+    /** @brief Data e horario em que o trabalho foi concluido. */
     Timestamp termino;
+    /** @brief Identificador do quadro ao qual o cartao pertence. */
     Identificador quadroId;
+    /** @brief E-mail da pessoa desenvolvedora responsavel pela execucao. */
     Email desenvolvedorEmail;
 public:
     /** @brief Constroi cartao novo, sem inicio ou termino do trabalho. */

@@ -14,6 +14,7 @@ using namespace std;
  */
 class Dominio {
 protected:
+    /** @brief Valor textual armazenado no dominio. */
     string valor;
     /**
      * @brief Método virtual puro responsável por validar o formato do dado.
@@ -36,6 +37,7 @@ public:
      */
     string getValor() const;
 
+    /** @brief Destrutor virtual padrão. */
     virtual ~Dominio() = default;
 };
 
@@ -46,7 +48,7 @@ inline string Dominio::getValor() const {
 /**
  * @brief Representa um endereço de e-mail válido.
  * 
- * Formato: parte-local@dominio.
+ * Formato: parte-local@@dominio.
  * Parte local: até 64 caracteres (a-z, 0-9, '.', '-'), não inicia/termina com '.' ou '-',
  * e '.' ou '-' deve ser seguido por letra ou dígito.
  * Domínio: partes separadas por '.', até 255 caracteres (a-z, 0-9, '-'), não inicia/termina com '-'.
@@ -83,7 +85,13 @@ private:
  */
 class Limite {
 private:
+    /** @brief Valor numerico do limite armazenado. */
     int valor;
+    /**
+     * @brief Valida se o limite esta entre 1 e 25.
+     * @param valor Inteiro a validar.
+     * @throw invalid_argument Caso fora do intervalo.
+     */
     void validar(int valor);
 
 public:
@@ -180,6 +188,11 @@ private:
 class Timestamp : public Dominio {
 private:
     void validar(string valor) override;
+    /**
+     * @brief Verifica se um ano e bissexto.
+     * @param ano Ano a verificar.
+     * @return true se o ano e bissexto; false caso contrario.
+     */
     bool ehBissexto(int ano);
 };
 

@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['validar_0',['validar',['../classDominio.html#a4df4d32136bed877313a4e2fb6374bb2',1,'Dominio::validar()'],['../classEmail.html#ab98a75e0ff1d75d0dc4f2be4b4865efe',1,'Email::validar()'],['../classEstado.html#a65be0bdc5aef994e894280659ccd40c9',1,'Estado::validar()'],['../classIdentificador.html#a575c15af79e742010e42504f39fb785f',1,'Identificador::validar()'],['../classLimite.html#a0f2920bae5fdd670e7d80a6102646cfc',1,'Limite::validar()'],['../classNome.html#ada557d4ffc2dd7ab2bd0a9dcf7879b5c',1,'Nome::validar()'],['../classPapel.html#a6e7aaa6752fa81fe44410761f96628c6',1,'Papel::validar()'],['../classPrioridade.html#a2bb3c838e545408ea49af004e831d303',1,'Prioridade::validar()'],['../classSenha.html#a40ba297d2cdc268f3fbffdbcd946bb2b',1,'Senha::validar()'],['../classTamanho.html#affe9f726635e14505ec55f63204e4d31',1,'Tamanho::validar()'],['../classTexto.html#abeeda55611a8a5935bfcdbe4c639e0cb',1,'Texto::validar()'],['../classTimestamp.html#acaab8c025facaeff417c7b9d7871b74c',1,'Timestamp::validar()']]],
+  ['valor_1',['valor',['../classDominio.html#adf6b3cc90ca5abce6cd462cdb313220e',1,'Dominio::valor'],['../classLimite.html#ae15cf079b3b993ba75726faefe09424d',1,'Limite::valor']]],
+  ['via_20terminal_20ou_20code_3a_3ablocks_2',['Como compilar e testar (via terminal ou Code::Blocks)',['../index.html#autotoc_md3',1,'']]]
+];

@@ -14,13 +14,13 @@
  * @brief Controladoras de servico de autenticacao e de Pessoa.
  */
 
-// ESCOLHA(Membro3): nomes das controladoras: "CS" (Controladora de Servico) +
+// Decisao de projeto: nomes das controladoras: "CS" (Controladora de Servico) +
 //   nome do servico. Cada uma realiza a interface IServico... correspondente.
-// ESCOLHA(Membro3): cada controladora recebe por ponteiro os containers e a
+// Decisao de projeto: cada controladora recebe por ponteiro os containers e a
 //   Sessao de que precisa. Assim todas compartilham os mesmos dados em memoria.
-// ESCOLHA(Membro3): falhas (sem login, papel sem direito, duplicidade, nao
+// Decisao de projeto: falhas (sem login, papel sem direito, duplicidade, nao
 //   encontrado, regra violada) viram std::logic_error com uma mensagem, como
-//   o Membro 2 pediu em interfaces.h. Falha de formato continua sendo
+//   definido em interfaces.h. Falha de formato continua sendo
 //   std::invalid_argument, lancada pelos dominios (e que tambem e logic_error).
 
 /**
@@ -42,7 +42,7 @@ public:
     CSAutenticacao(ContainerPessoas* pessoas, Sessao* sessao)
         : pessoas(pessoas), sessao(sessao) {}
 
-    // ESCOLHA(Membro3): se a autenticacao falha, a sessao anterior tambem e
+    // Decisao de projeto: se a autenticacao falha, a sessao anterior tambem e
     //   encerrada. Assim, depois de autenticar(), ha alguem autenticado se e
     //   so se devolveu true.
     /**
@@ -63,9 +63,9 @@ public:
     }
 
     /**
-     * @brief Encerra a sessao (logout).
+     * @brief Encerra a sessao (logout); depois disso ninguem esta autenticado.
      */
-    void encerrarSessao() {
+    void encerrarSessao() override {
         sessao->encerrar();
     }
 };
@@ -106,7 +106,7 @@ public:
              ContainerCartoes* cartoes, Sessao* sessao)
         : pessoas(pessoas), projetos(projetos), cartoes(cartoes), sessao(sessao) {}
 
-    // ESCOLHA(Membro3): criar nao exige autenticacao, pois a conta nasce antes
+    // Decisao de projeto: criar nao exige autenticacao, pois a conta nasce antes
     //   do login (enunciado, secao 2).
     /**
      * @brief Cria uma conta.
@@ -119,10 +119,11 @@ public:
         }
     }
 
-    // ESCOLHA(Membro3): qualquer pessoa autenticada le qualquer pessoa (o
+    // Decisao de projeto: qualquer pessoa autenticada le qualquer pessoa (o
     //   enunciado libera LER PESSOA para os dois papeis).
-    // TODO(Membro2): a leitura devolve a senha junto; decidir se isso e
-    //   aceitavel ou se a apresentacao deve esconde-la.
+    // Decisao de projeto: o servico devolve a entidade completa (inclusive a
+    //   senha, que e atributo da entidade); a camada de apresentacao nao exibe
+    //   a senha ao mostrar os dados lidos.
     /**
      * @brief Le os dados de uma pessoa.
      * @param email Email da pessoa.
@@ -138,8 +139,8 @@ public:
         return *pessoa;
     }
 
-    // ESCOLHA(Membro3): so a propria pessoa atualiza seus dados.
-    // ESCOLHA(Membro3): o papel so pode mudar se a pessoa nao tiver vinculos
+    // Decisao de projeto: so a propria pessoa atualiza seus dados.
+    // Decisao de projeto: o papel so pode mudar se a pessoa nao tiver vinculos
     //   (gestor de projeto ou desenvolvedor de cartao), para nao deixar o
     //   sistema inconsistente.
     /**
@@ -160,10 +161,11 @@ public:
         pessoas->atualizar(pessoa);
     }
 
-    // ESCOLHA(Membro3): so a propria pessoa exclui a propria conta, e so se nao
-    //   tiver vinculos. Bloquear (em vez de apagar em cascata) evita
-    //   inconsistencia (requisito 15 do enunciado). A sessao e encerrada junto.
-    // TODO(Membro2): se preferir cascata, mudar aqui.
+    // Decisao de projeto: so a propria pessoa exclui a propria conta, e so se
+    //   nao tiver vinculos. A exclusao e bloqueada (e nao feita em cascata)
+    //   para nao apagar dados de outras pessoas sem aviso e para nao deixar
+    //   projeto sem gestor ou cartao sem desenvolvedor (requisito 15 do
+    //   enunciado). A sessao e encerrada junto.
     /**
      * @brief Exclui a propria conta da pessoa autenticada.
      * @param email Email da conta a excluir.

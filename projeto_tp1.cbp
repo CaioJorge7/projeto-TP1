@@ -13,10 +13,6 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
-					<Add option="-std=c++11" />
-					<Add option="-Wall" />
-					<Add option="-Wextra" />
-					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -26,22 +22,50 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add option="-std=c++11" />
-					<Add option="-Wall" />
-					<Add option="-Wextra" />
-					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
 				</Linker>
 			</Target>
+			<Target title="Teste_Dominios">
+				<Option output="bin/Testes/teste_dominios" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Teste_Dominios/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Teste_Entidades">
+				<Option output="bin/Testes/teste_entidades" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Teste_Entidades/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Teste_Servicos">
+				<Option output="bin/Testes/teste_servicos" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Teste_Servicos/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-Wall" />
 			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+			<Add option="-Wextra" />
 			<Add directory="include" />
+			<Add directory="tests" />
 		</Compiler>
-		<Unit filename="include/apresentacao.h" />
+		<Unit filename="include/apresentacao.h">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="include/containers.h" />
 		<Unit filename="include/controladoras_cartao.h" />
 		<Unit filename="include/controladoras_pessoa.h" />
@@ -52,10 +76,48 @@
 		<Unit filename="include/interfaces.h" />
 		<Unit filename="include/sessao.h" />
 		<Unit filename="include/tempo.h" />
-		<Unit filename="main.cpp" />
-		<Unit filename="src/apresentacao.cpp" />
+		<Unit filename="main.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="main_teste_dominios.cpp">
+			<Option target="Teste_Dominios" />
+		</Unit>
+		<Unit filename="main_teste_entidades.cpp">
+			<Option target="Teste_Entidades" />
+		</Unit>
+		<Unit filename="main_teste_servicos.cpp">
+			<Option target="Teste_Servicos" />
+		</Unit>
+		<Unit filename="src/apresentacao.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
 		<Unit filename="src/dominios.cpp" />
-		<Unit filename="src/entidades.cpp" />
+		<Unit filename="src/entidades.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+			<Option target="Teste_Entidades" />
+			<Option target="Teste_Servicos" />
+		</Unit>
+		<Unit filename="tests/testes_dominios.cpp">
+			<Option target="Teste_Dominios" />
+		</Unit>
+		<Unit filename="tests/testes_dominios.h">
+			<Option target="Teste_Dominios" />
+		</Unit>
+		<Unit filename="tests/testes_entidades.cpp">
+			<Option target="Teste_Entidades" />
+		</Unit>
+		<Unit filename="tests/testes_entidades.h">
+			<Option target="Teste_Entidades" />
+		</Unit>
+		<Unit filename="tests/testes_servicos.cpp">
+			<Option target="Teste_Servicos" />
+		</Unit>
+		<Unit filename="tests/testes_servicos.h">
+			<Option target="Teste_Servicos" />
+		</Unit>
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

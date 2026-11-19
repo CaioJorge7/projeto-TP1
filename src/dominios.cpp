@@ -193,7 +193,7 @@ void Senha::validar(string valor) {
 // ============================================================================
 void Tamanho::validar(string valor) {
     // Requisito nao funcional 12 dispensou acentuacao, mas aceitamos ambos por seguranca
-    if (valor != "GRANDE" && valor != "MEDIO" && valor != "MÉDIO" && valor != "PEQUENO") {
+    if (valor != "GRANDE" && valor != "MEDIO" && valor != "PEQUENO") {
         throw invalid_argument("Tamanho invalido. Valores aceitos: GRANDE, MEDIO, PEQUENO.");
     }
 }

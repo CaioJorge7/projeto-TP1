@@ -10,10 +10,10 @@
 #include "controladoras_quadro.h"
 #include "controladoras_cartao.h"
 
-// ESCOLHA(Membro3): cada caso de teste monta um "Cenario" novo (containers,
+// Decisao de projeto: cada caso de teste monta um "Cenario" novo (containers,
 //   sessao e controladoras vazios) e prepara so o que precisa usando os
 //   proprios servicos. Assim os casos nao dependem uns dos outros.
-// ESCOLHA(Membro3): como os servicos avisam falhas por excecao, os testes de
+// Decisao de projeto: como os servicos avisam falhas por excecao, os testes de
 //   falha usam lancaExcecao(): devolve true se o codigo lancou std::logic_error.
 
 namespace {
@@ -201,6 +201,9 @@ bool TesteServicos::testarCriarProjeto() {
     entrar(c, DEV);
     if (!lancaExcecao([&]() { c.projeto.criar(projeto); })) return false;   // desenvolvedor nao cria
     entrar(c, GESTOR);
+    Projeto invertido(idn("PRJ002"), nm("Projeto"), tx("Descricao."), ts("31-DEZ-2026-18:00"),
+                      ts("01-JAN-2026-08:00"), em(GESTOR));
+    if (!lancaExcecao([&]() { c.projeto.criar(invertido); })) return false;   // termino antes do inicio
     c.projeto.criar(projeto);
     return c.projeto.ler(idn(PROJETO)).getGestorEmail().getValor() == GESTOR;
 }

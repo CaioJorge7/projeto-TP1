@@ -8,6 +8,7 @@
 #include "interfaces.h"
 #include "containers.h"
 #include "sessao.h"
+#include "tempo.h"
 
 /**
  * @file controladoras_projeto.h
@@ -46,6 +47,21 @@ private:
         return *projeto;
     }
 
+    /**
+     * @brief Confere se o termino do projeto nao e anterior ao inicio.
+     * @param projeto Projeto a conferir.
+     * @throw std::logic_error Se as duas datas existem e o termino e anterior ao inicio.
+     */
+    void exigirDatasCoerentes(const Projeto& projeto) const {
+        long inicio;
+        long termino;
+        if (timestampParaMinutos(projeto.getInicio(), &inicio) &&
+            timestampParaMinutos(projeto.getTermino(), &termino) &&
+            termino < inicio) {
+            throw std::logic_error("O termino do projeto nao pode ser anterior ao inicio.");
+        }
+    }
+
 public:
     /**
      * @brief Cria a controladora.
@@ -58,17 +74,19 @@ public:
               ContainerQuadros* quadros, Sessao* sessao)
         : pessoas(pessoas), projetos(projetos), quadros(quadros), sessao(sessao) {}
 
-    // ESCOLHA(Membro3): so GESTOR cria projeto, e o gestor do projeto e quem o
+    // Decisao de projeto: so GESTOR cria projeto, e o gestor do projeto e quem o
     //   criou (como diz o enunciado). Por isso o gestorEmail recebido e
     //   trocado pelo email do usuario autenticado.
     /**
      * @brief Cria um projeto; o usuario autenticado vira o gestor dele.
      * @param projeto Dados do projeto (o gestorEmail e ignorado).
-     * @throw std::logic_error Se o usuario nao esta autenticado como GESTOR ou
-     *        se ja existe projeto com o mesmo identificador.
+     * @throw std::logic_error Se o usuario nao esta autenticado como GESTOR, se
+     *        o termino e anterior ao inicio ou se ja existe projeto com o mesmo
+     *        identificador.
      */
     void criar(const Projeto& projeto) override {
         Pessoa usuario = sessao->exigirGestor(*pessoas);
+        exigirDatasCoerentes(projeto);
         Projeto novo = projeto;
         novo.setGestorEmail(usuario.getEmail());
         if (!projetos->incluir(novo)) {
@@ -76,7 +94,7 @@ public:
         }
     }
 
-    // ESCOLHA(Membro3): qualquer pessoa autenticada le qualquer projeto
+    // Decisao de projeto: qualquer pessoa autenticada le qualquer projeto
     //   (o enunciado libera LER PROJETO para os dois papeis).
     /**
      * @brief Le os dados de um projeto.
@@ -93,29 +111,30 @@ public:
         return *projeto;
     }
 
-    // ESCOLHA(Membro3): so o gestor DO projeto atualiza (nao basta ser GESTOR).
-    //   O identificador e o gestorEmail nao mudam: valem os que ja estao
-    //   guardados.
-    // TODO(Membro2): nao ha validacao de inicio/termino (por exemplo, termino
-    //   depois do inicio).
+    // Decisao de projeto: so o gestor DO projeto atualiza (nao basta ser
+    //   GESTOR). O identificador e o gestorEmail nao mudam: valem os que ja
+    //   estao guardados.
+    // Decisao de projeto: o termino nao pode ser anterior ao inicio (vale
+    //   tambem na criacao).
     /**
      * @brief Atualiza os dados de um projeto.
      * @param projeto Novos dados (o identificador identifica o projeto).
-     * @throw std::logic_error Se o usuario nao e o gestor do projeto ou o
-     *        projeto nao existe.
+     * @throw std::logic_error Se o usuario nao e o gestor do projeto, o
+     *        projeto nao existe ou o termino e anterior ao inicio.
      */
     void atualizar(const Projeto& projeto) override {
         Pessoa usuario = sessao->exigirGestor(*pessoas);
         const Projeto& atual = exigirProjetoDoGestor(usuario, projeto.getIdentificador());
+        exigirDatasCoerentes(projeto);
         Projeto novo = projeto;
         novo.setGestorEmail(atual.getGestorEmail());
         projetos->atualizar(novo);
     }
 
-    // ESCOLHA(Membro3): so o gestor DO projeto exclui, e so se o projeto nao
-    //   tiver quadros. Bloquear (em vez de apagar em cascata) evita
-    //   inconsistencia (requisito 15).
-    // TODO(Membro2): se preferir cascata, mudar aqui.
+    // Decisao de projeto: so o gestor DO projeto exclui, e so se o projeto nao
+    //   tiver quadros. A exclusao e bloqueada (e nao feita em cascata) para
+    //   nao apagar quadros e cartoes sem aviso e para nao deixar quadro sem
+    //   projeto (requisito 15).
     /**
      * @brief Exclui um projeto.
      * @param identificador Identificador do projeto.
@@ -131,8 +150,9 @@ public:
         projetos->remover(identificador);
     }
 
-    // TODO(Membro2): decidir se a lista deve ser filtrada por pessoa. Aqui
-    //   qualquer pessoa autenticada ve todos os projetos.
+    // Decisao de projeto: qualquer pessoa autenticada lista todos os projetos
+    //   (o enunciado libera LISTAR PROJETO para os dois papeis e nao preve
+    //   filtro). A apresentacao exibe o identificador de cada um.
     /**
      * @brief Lista todos os projetos.
      * @return Copias dos projetos, em ordem de identificador.

@@ -375,10 +375,9 @@ void ApresentacaoPessoa::listar() {
         if (lista.empty()) {
             cout << "  Nenhuma pessoa cadastrada.\n";
         } else {
-            cout << "  Total: " << lista.size() << " pessoa(s)\n";
+            cout << "  Total: " << lista.size() << " pessoa(s)\n\n";
             for (size_t i = 0; i < lista.size(); ++i) {
-                cout << "\n  [" << (i + 1) << "]\n";
-                exibirPessoa(lista[i]);
+                cout << "  " << lista[i].getEmail().getValor() << "\n";
             }
         }
     } catch (const std::exception& e) {
@@ -480,7 +479,7 @@ void ApresentacaoProjeto::ler() {
 
 void ApresentacaoProjeto::atualizar() {
     exibirSeparador("ATUALIZAR PROJETO");
-    cout << "  NOTA: Somente o gestor do projeto pode atualizá-lo.\n"
+    cout << "  NOTA: Somente o gestor do projeto pode atualiza-lo.\n"
          << "        O identificador e o gestor nao podem ser alterados.\n\n";
 
     Identificador id;
@@ -530,7 +529,7 @@ void ApresentacaoProjeto::atualizar() {
 
 void ApresentacaoProjeto::excluir() {
     exibirSeparador("EXCLUIR PROJETO");
-    cout << "  NOTA: Somente o gestor do projeto pode excluí-lo.\n"
+    cout << "  NOTA: Somente o gestor do projeto pode exclui-lo.\n"
          << "        O projeto nao pode ser excluido se ainda houver quadros.\n\n";
 
     Identificador id;
@@ -559,10 +558,9 @@ void ApresentacaoProjeto::listar() {
         if (lista.empty()) {
             cout << "  Nenhum projeto cadastrado.\n";
         } else {
-            cout << "  Total: " << lista.size() << " projeto(s)\n";
+            cout << "  Total: " << lista.size() << " projeto(s)\n\n";
             for (size_t i = 0; i < lista.size(); ++i) {
-                cout << "\n  [" << (i + 1) << "]\n";
-                exibirProjeto(lista[i]);
+                cout << "  " << lista[i].getIdentificador().getValor() << "\n";
             }
         }
     } catch (const std::exception& e) {
@@ -716,10 +714,9 @@ void ApresentacaoQuadro::listar() {
         if (lista.empty()) {
             cout << "  Nenhum quadro cadastrado.\n";
         } else {
-            cout << "  Total: " << lista.size() << " quadro(s)\n";
+            cout << "  Total: " << lista.size() << " quadro(s)\n\n";
             for (size_t i = 0; i < lista.size(); ++i) {
-                cout << "\n  [" << (i + 1) << "]\n";
-                exibirQuadro(lista[i]);
+                cout << "  " << lista[i].getIdentificador().getValor() << "\n";
             }
         }
     } catch (const std::exception& e) {
@@ -920,10 +917,9 @@ void ApresentacaoCartao::listar() {
         if (lista.empty()) {
             cout << "  Nenhum cartao cadastrado.\n";
         } else {
-            cout << "  Total: " << lista.size() << " cartao(es)\n";
+            cout << "  Total: " << lista.size() << " cartao(es)\n\n";
             for (size_t i = 0; i < lista.size(); ++i) {
-                cout << "\n  [" << (i + 1) << "]\n";
-                exibirCartao(lista[i]);
+                cout << "  " << lista[i].getIdentificador().getValor() << "\n";
             }
         }
     } catch (const std::exception& e) {
@@ -1115,15 +1111,13 @@ Aplicacao::Aplicacao(IServicoAutenticacao*    sa,
                      IServicoPessoa*          sp,
                      IServicoProjeto*         spj,
                      IServicoQuadro*          sq,
-                     IServicoCartaoAtividade* sc,
-                     std::function<void()>    logoutCallback)
+                     IServicoCartaoAtividade* sc)
     : sAuth(sa),
       sPessoa(sp),
       apPessoa(sp),
       apProjeto(spj),
       apQuadro(sq),
       apCartao(sc),
-      fnLogout(logoutCallback),
       autenticado(false)
 {}
 
@@ -1156,7 +1150,7 @@ void Aplicacao::autenticar() {
 }
 
 void Aplicacao::logout() {
-    fnLogout();          // chama CSAutenticacao::encerrarSessao() via callback
+    sAuth->encerrarSessao();   // logout pelo contrato IServicoAutenticacao
     autenticado = false;
     cout << "\n  Sessao encerrada. Ate logo!\n";
     pausar();

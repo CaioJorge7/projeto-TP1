@@ -1,24 +1,117 @@
+// Diagrama UML de modulos (componentes), interfaces e relacionamentos.
+// Gerar: dot -Tpng -Gdpi=200 docs/uml_modulos.dot -o uml_modulos.png
 digraph UML_Modulos {
-  graph [rankdir=TB, bgcolor="white", compound=true, nodesep=0.7, ranksep=0.5,
-    pad=0.25, fontname="DejaVu Sans", labelloc=t,
-    label="DIAGRAMA UML DE MODULOS E DEPENDENCIAS - TP1",
-    fontsize=18, fontcolor="#12324B"];
-  node [shape=box, style="rounded,filled", penwidth=1.4, fontname="DejaVu Sans", fontsize=12,
-        fillcolor="#EDF4F6", color="#44718A", fontcolor="#13354B", margin="0.25,0.15"];
-  edge [color="#47748D", penwidth=1.5, arrowsize=0.8, fontname="DejaVu Sans", fontsize=10];
+  graph [rankdir=TB, bgcolor="white", compound=true, newrank=true, nodesep=0.35, ranksep=0.55,
+         pad=0.2, fontname="DejaVu Sans", fontsize=11, labelloc=t, labeljust=l];
+  node  [fontname="DejaVu Sans", fontsize=10, shape=plain];
+  edge  [fontname="DejaVu Sans", fontsize=9, color="#333333", arrowsize=0.8];
 
-  Apresentacao [label="<<camada>>\nApresentacao\nMenus e controladoras (Membro 4)", fillcolor="#D3E9F2"];
-  Interfaces [label="<<contratos>>\nIServicoPessoa, IServicoAutenticacao\nIServicoProjeto, IServicoQuadro\nIServicoCartaoAtividade", fillcolor="#F4EBC7"];
-  Servico [label="<<camada>>\nServico\nControladoras, regras Kanban, WIP\nCRUD, autenticacao e metricas (Membro 3)", fillcolor="#D4EBE6"];
-  Entidades [label="<<modulo>>\nEntidades (Membro 2)\nPessoa, Projeto, Quadro, CartaoAtividade"];
-  Dominios [label="<<modulo>>\nDominios (Membro 1)\nEmail, Nome, Texto, Identificador, etc."];
-  Persistencia [label="<<modulo>>\nContêineres / SQLite (Membro 3)\nArmazenamento, integridade e consultas", fillcolor="#E9E2F3"];
+  // ------------------------------------------------------------------ Apresentacao
+  subgraph cluster_apresentacao {
+    label=<<B>«layer» Apresentação</B>>; style="rounded"; color="#2F5D7C"; bgcolor="#EEF5FA"; margin=12;
+    MAAutenticacao [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="white" COLOR="#2F5D7C">
+      <TR><TD><FONT POINT-SIZE="8">«component»</FONT></TD></TR><TR><TD><B>Autenticação</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">Aplicacao</FONT></TD></TR></TABLE>>];
+    MAPessoas [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="white" COLOR="#2F5D7C">
+      <TR><TD><FONT POINT-SIZE="8">«component»</FONT></TD></TR><TR><TD><B>Pessoas</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">ApresentacaoPessoa</FONT></TD></TR></TABLE>>];
+    MAProjetos [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="white" COLOR="#2F5D7C">
+      <TR><TD><FONT POINT-SIZE="8">«component»</FONT></TD></TR><TR><TD><B>Projetos</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">ApresentacaoProjeto</FONT></TD></TR></TABLE>>];
+    MAQuadros [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="white" COLOR="#2F5D7C">
+      <TR><TD><FONT POINT-SIZE="8">«component»</FONT></TD></TR><TR><TD><B>Quadros</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">ApresentacaoQuadro</FONT></TD></TR></TABLE>>];
+    MACartoes [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="white" COLOR="#2F5D7C">
+      <TR><TD><FONT POINT-SIZE="8">«component»</FONT></TD></TR><TR><TD><B>Cartões de Atividades</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">ApresentacaoCartao</FONT></TD></TR></TABLE>>];
+  }
 
-  Apresentacao -> Interfaces [label="utiliza"];
-  Servico -> Interfaces [style=dashed, arrowhead=empty, label="implementa", constraint=false];
-  Interfaces -> Entidades [label="tipos de retorno/parametro"];
-  Servico -> Entidades [label="opera sobre"];
-  Servico -> Persistencia [label="le e grava"];
-  Entidades -> Dominios [label="compostas por"];
-  Persistencia -> Entidades [label="armazena"];
+  // ------------------------------------------------------------------ Interfaces
+  IAut [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="#FFF8E1" COLOR="#8A6D1F">
+    <TR><TD><FONT POINT-SIZE="8">«interface»</FONT></TD></TR><TR><TD><B>IServicoAutenticacao</B></TD></TR></TABLE>>];
+  IPes [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="#FFF8E1" COLOR="#8A6D1F">
+    <TR><TD><FONT POINT-SIZE="8">«interface»</FONT></TD></TR><TR><TD><B>IServicoPessoa</B></TD></TR></TABLE>>];
+  IPro [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="#FFF8E1" COLOR="#8A6D1F">
+    <TR><TD><FONT POINT-SIZE="8">«interface»</FONT></TD></TR><TR><TD><B>IServicoProjeto</B></TD></TR></TABLE>>];
+  IQua [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="#FFF8E1" COLOR="#8A6D1F">
+    <TR><TD><FONT POINT-SIZE="8">«interface»</FONT></TD></TR><TR><TD><B>IServicoQuadro</B></TD></TR></TABLE>>];
+  ICar [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="#FFF8E1" COLOR="#8A6D1F">
+    <TR><TD><FONT POINT-SIZE="8">«interface»</FONT></TD></TR><TR><TD><B>IServicoCartaoAtividade</B></TD></TR></TABLE>>];
+
+  // ------------------------------------------------------------------ Servico
+  subgraph cluster_servico {
+    label=<<B>«layer» Serviço</B>>; style="rounded"; color="#2E6B5A"; bgcolor="#EEF7F3"; margin=12;
+    subgraph cluster_controladoras {
+    label=<<FONT POINT-SIZE="9">Controladoras de serviço</FONT>>; style="dashed,rounded"; color="#7AA596"; bgcolor="#F7FCFA"; margin=8;
+    MSAutenticacao [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="white" COLOR="#2E6B5A">
+      <TR><TD><FONT POINT-SIZE="8">«component»</FONT></TD></TR><TR><TD><B>Autenticação</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">CSAutenticacao</FONT></TD></TR></TABLE>>];
+    MSPessoas [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="white" COLOR="#2E6B5A">
+      <TR><TD><FONT POINT-SIZE="8">«component»</FONT></TD></TR><TR><TD><B>Pessoas</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">CSPessoa</FONT></TD></TR></TABLE>>];
+    MSProjetos [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="white" COLOR="#2E6B5A">
+      <TR><TD><FONT POINT-SIZE="8">«component»</FONT></TD></TR><TR><TD><B>Projetos</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">CSProjeto</FONT></TD></TR></TABLE>>];
+    MSQuadros [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="white" COLOR="#2E6B5A">
+      <TR><TD><FONT POINT-SIZE="8">«component»</FONT></TD></TR><TR><TD><B>Quadros</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">CSQuadro</FONT></TD></TR></TABLE>>];
+    MSCartoes [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="white" COLOR="#2E6B5A">
+      <TR><TD><FONT POINT-SIZE="8">«component»</FONT></TD></TR><TR><TD><B>Cartões de Atividades</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">CSCartao</FONT></TD></TR></TABLE>>];
+    }
+    Sessao [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="white" COLOR="#2E6B5A">
+      <TR><TD><FONT POINT-SIZE="8">«component»</FONT></TD></TR><TR><TD><B>Sessão</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">Sessao</FONT></TD></TR></TABLE>>];
+    Conteineres [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="white" COLOR="#2E6B5A">
+      <TR><TD><FONT POINT-SIZE="8">«component»</FONT></TD></TR><TR><TD><B>Contêineres (std::map)</B></TD></TR>
+      <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">ContainerPessoas, ContainerProjetos,<BR/>ContainerQuadros, ContainerCartoes</FONT></TD></TR></TABLE>>];
+  }
+
+  // ------------------------------------------------------------------ Modulos compartilhados
+  Entidades [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="#F4F4F4" COLOR="#555555">
+    <TR><TD><FONT POINT-SIZE="8">«component»</FONT></TD></TR><TR><TD><B>Entidades</B></TD></TR>
+    <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">Pessoa, Projeto, Quadro, CartaoAtividade</FONT></TD></TR></TABLE>>];
+  Dominios [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="#F4F4F4" COLOR="#555555">
+    <TR><TD><FONT POINT-SIZE="8">«component»</FONT></TD></TR><TR><TD><B>Domínios</B></TD></TR>
+    <TR><TD><FONT POINT-SIZE="8" COLOR="#555555">Email, Estado, Identificador, Limite, Nome, Papel,<BR/>Prioridade, Senha, Tamanho, Texto, Timestamp</FONT></TD></TR></TABLE>>];
+
+  { rank=same; MAAutenticacao; MAPessoas; MAProjetos; MAQuadros; MACartoes; }
+  { rank=same; IAut; IPes; IPro; IQua; ICar; }
+  { rank=same; MSAutenticacao; MSPessoas; MSProjetos; MSQuadros; MSCartoes; }
+  { rank=same; Sessao; Conteineres; }
+
+  // ordem horizontal
+  edge [style=invis];
+  MAAutenticacao -> MAPessoas -> MAProjetos -> MAQuadros -> MACartoes;
+  IAut -> IPes -> IPro -> IQua -> ICar;
+  MSAutenticacao -> MSPessoas -> MSProjetos -> MSQuadros -> MSCartoes;
+  Sessao -> Conteineres;
+
+  // Apresentacao depende das interfaces («use»)
+  edge [style=dashed, arrowhead=vee, label="«use»"];
+  MAAutenticacao -> IAut;
+  MAPessoas -> IPes;
+  MAProjetos -> IPro;
+  MAQuadros -> IQua;
+  MACartoes -> ICar;
+  MAAutenticacao -> IPes [constraint=false, label=""];  // criar conta antes do login
+
+  // Servico realiza as interfaces (realizacao: tracejada com triangulo vazio)
+  edge [style=dashed, dir=back, arrowtail=onormal, arrowhead=none, label=""];
+  IAut -> MSAutenticacao;
+  IPes -> MSPessoas;
+  IPro -> MSProjetos;
+  IQua -> MSQuadros;
+  ICar -> MSCartoes;
+
+  // Dependencias internas do Servico (todas as controladoras usam Sessao e Conteineres)
+  edge [style=dashed, dir=forward, arrowhead=vee, arrowtail=none, label="«use»"];
+  MSPessoas -> Sessao [ltail=cluster_controladoras];
+  MSQuadros -> Conteineres [ltail=cluster_controladoras];
+  Sessao -> Conteineres [label="consulta pessoas", constraint=false];
+
+  // Uso dos modulos compartilhados
+  edge [label=""];
+  Conteineres -> Entidades [label="  armazena"];
+  Entidades -> Dominios [label="  compostas por"];
 }

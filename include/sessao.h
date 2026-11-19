@@ -11,16 +11,16 @@
  * @brief Guarda quem esta autenticado, para as controladoras conferirem o papel.
  */
 
-// ESCOLHA(Membro3): as interfaces do Membro 2 nao recebem o usuario em cada
+// Decisao de projeto: as interfaces de servico nao recebem o usuario em cada
 //   chamada. Por isso existe uma Sessao, compartilhada (por ponteiro) entre
 //   CSAutenticacao e as outras controladoras: autenticar() guarda o email, e os
 //   demais servicos consultam a Sessao para saber quem e e qual o papel.
-// ESCOLHA(Membro3): o papel nao e guardado na Sessao; e lido do container de
+// Decisao de projeto: o papel nao e guardado na Sessao; e lido do container de
 //   pessoas a cada chamada. Assim, se a conta mudar ou sumir, a Sessao nao fica
 //   desatualizada.
-// TODO(Membro2): a interface IServicoAutenticacao nao tem "sair" (logout).
-//   CSAutenticacao tem encerrarSessao(), mas a apresentacao so enxerga a
-//   interface. Decidir se a interface ganha esse metodo.
+// Decisao de projeto: o logout faz parte do contrato IServicoAutenticacao
+//   (encerrarSessao()), para que a apresentacao encerre a sessao sem conhecer
+//   a classe concreta CSAutenticacao.
 
 /**
  * @brief Usuario autenticado no momento (no maximo um).

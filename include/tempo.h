@@ -11,11 +11,13 @@
 #include <vector>
 #include "dominios.h"
 
-// ESCOLHA(Membro3): o dominio Timestamp guarda o valor como texto
+// Decisao de projeto: o dominio Timestamp guarda o valor como texto
 //   ("05-JAN-2024-09:30"). Para calcular tempo de ciclo e lead time, esta
 //   funcao converte o texto em minutos desde 01-JAN-2000-00:00 (o ano minimo
-//   do dominio). Fica aqui, e nao em dominios.h, para nao mexer no trabalho do
-//   Membro 1.
+//   do dominio). Todos os tempos do sistema sao expressos em minutos.
+// Decisao de projeto: a conversao fica na camada de servico, e nao em
+//   dominios.h, porque calcular intervalos e regra de negocio; o dominio so
+//   valida o formato.
 
 /**
  * @brief Diz se um ano e bissexto.

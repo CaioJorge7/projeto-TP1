@@ -9,7 +9,7 @@ Sistema de gestão de projetos baseado no método Kanban desenvolvido em C++ (pa
 A arquitetura segue o estilo em camadas e módulos com interfaces abstratas (classes abstratas com métodos virtuais puros), documentação em **Doxygen** (HTML), modelagem **UML** (diagrama de classes, módulos, interfaces e relacionamentos, incluindo artefatos em `.dot` e `.pdf`) e suítes de testes unitários.
 
 * **Camada de Apresentação**: responsável pela interface com o usuário (incluindo classes controladoras da apresentação), leitura e pré-validação de dados de entrada, tratamento de exceções e comunicação com a camada de negócio exclusivamente por meio das interfaces abstratas (`IServico*`).
-* **Camada de Serviço**: responsável pela lógica de negócio, controle de sessão/permissões, regras Kanban, cálculo de métricas e armazenamento de dados por meio de classes controladoras e contêineres (em memória com `std::map` na implementação atual; a especificação também prevê armazenamento em memória ou SQLite).
+* **Camada de Serviço**: responsável pela lógica de negócio, controle de sessão/permissões, regras Kanban, cálculo de métricas e armazenamento de dados por meio de classes controladoras e contêineres (armazenamento em memória com `std::map`).
 * **Camadas de Dados e Contratos**: classes de **Domínio** (com validação e exceção no `set`), classes de **Entidade** (com atributos do tipo domínio e chaves primárias imutáveis após a construção) e **Interfaces** abstratas que desacoplam os módulos.
 
 ---
@@ -17,7 +17,7 @@ A arquitetura segue o estilo em camadas e módulos com interfaces abstratas (cla
 ## Estrutura do Repositório
 
 ```text
-├── docs/                                    # Diagramas UML (.dot e PDF do modelo de arquitetura)
+├── docs/                                    # Modelo de arquitetura (PDF) e fontes .dot dos diagramas UML
 ├── include/                                 # Cabeçalhos (.h) das camadas e utilitários
 │   ├── dominios.h                           # Declaração das 11 classes de domínio (Doxygen)
 │   ├── entidades.h                          # Declaração das 4 entidades do Kanban (Doxygen)
@@ -41,12 +41,10 @@ A arquitetura segue o estilo em camadas e módulos com interfaces abstratas (cla
 ├── main_teste_entidades.cpp                 # Executável isolado de testes de entidades
 ├── main_teste_servicos.cpp                  # Executável isolado de testes de serviços
 ├── projeto_tp1.cbp                          # Projeto para a IDE Code::Blocks
-├── Doxyfile                                 # Configuração para geração da documentação HTML
 ├── EQUIPE.txt                               # Identificação dos membros e artefatos desenvolvidos
 └── README.md                                # Documentação geral do projeto
 ```
 
-*(Nota: os arquivos `README__Membro2_8md.html`, `README_8md.html` e `README__Membro3_8md.html` são páginas HTML geradas automaticamente pelo **Doxygen** a partir dos arquivos Markdown do repositório.)*
 
 ---
 
@@ -85,25 +83,25 @@ As entidades utilizam exclusivamente atributos do tipo domínio com métodos pú
 Implementada no formato *header-only* (sem `.cpp` próprio; basta incluir `include/` no caminho de busca). As controladoras realizam as interfaces abstratas, operam sobre quatro contêineres em memória (`std::map`) e verificam sessão e regras de negócio via `Sessao`.
 
 * **Exceções**: violações de regra de negócio, permissão, autenticação, duplicidade, referência inexistente ou estado inválido lançam `std::logic_error`; falhas de formato lançam `std::invalid_argument`.
-* **Unidade de tempo**: tempos de ciclo e lead time são calculados em **minutos** a partir dos `Timestamp` (convenção a confirmar/alinhar com a equipe conforme os comentários no código).
+* **Unidade de tempo**: todos os tempos do sistema (tempo de ciclo, lead time e suas médias) são expressos em **minutos**, calculados a partir dos `Timestamp`.
 
 | Serviço / Funcionalidade | Permissão / Quem pode | Regras Aplicadas |
 | :--- | :--- | :--- |
 | **Autenticar** | Qualquer usuário | Inicia sessão com e-mail e senha; se falhar, encerra também a sessão anterior. |
 | **Criar Pessoa** | Sem login | Impede e-mail duplicado; demais serviços exigem usuário autenticado. |
-| **Ler / Listar Pessoa** | Autenticado | Leitura exibe dados da entidade; listagem exibe identificadores/dados cadastrados. |
+| **Ler / Listar Pessoa** | Autenticado | Leitura exibe os dados da pessoa (sem a senha); listagem exibe o e-mail (identificador) de cada pessoa. |
 | **Atualizar Pessoa** | Próprio usuário | Chave primária (`email`) não muda; troca de `papel` só ocorre se não houver projetos geridos nem cartões vinculados. |
 | **Excluir Pessoa** | Próprio usuário | Bloqueado se for gestor de projeto ou desenvolvedor de cartão; encerra a sessão. |
-| **Criar Projeto** | `GESTOR` | Quem cria passa a ser o gestor do projeto (`gestorEmail` é definido pelo usuário autenticado). |
-| **Ler / Listar Projeto** | Autenticado | Consulta/lista projetos cadastrados. |
-| **Atualizar Projeto** | Gestor do projeto | Identificador e gestor originais não mudam. |
+| **Criar Projeto** | `GESTOR` | Quem cria passa a ser o gestor do projeto (`gestorEmail` é definido pelo usuário autenticado); término não pode ser anterior ao início. |
+| **Ler / Listar Projeto** | Autenticado | Leitura exibe os dados do projeto; listagem exibe o identificador de cada projeto. |
+| **Atualizar Projeto** | Gestor do projeto | Identificador e gestor originais não mudam; término não pode ser anterior ao início. |
 | **Excluir Projeto** | Gestor do projeto | Bloqueado enquanto houver quadros vinculados ao projeto. |
 | **Criar Quadro** | Gestor do projeto | Exige projeto existente. |
-| **Ler / Listar Quadro** | Autenticado | Consulta/lista quadros cadastrados. |
+| **Ler / Listar Quadro** | Autenticado | Leitura exibe os dados do quadro; listagem exibe o identificador de cada quadro. |
 | **Atualizar Quadro** | Gestor do projeto | Novo `limite` não pode ser menor que o WIP atual; identificador e `projetoId` não mudam. |
 | **Excluir Quadro** | Gestor do projeto | Bloqueado enquanto houver cartões no quadro. |
 | **Criar Cartão** | Gestor do projeto | Exige desenvolvedor existente com papel `DESENVOLVEDOR`; inicia em `A FAZER` com `entrada` obrigatória. |
-| **Ler / Listar Cartão** | Autenticado | Consulta/lista cartões cadastrados. |
+| **Ler / Listar Cartão** | Autenticado | Leitura exibe os dados do cartão; listagem exibe o identificador de cada cartão. |
 | **Atualizar Cartão** | Gestor do projeto | Permite trocar desenvolvedor válido; estado, datas e quadro só mudam via movimentação. |
 | **Excluir Cartão** | Gestor do projeto | Remove o cartão sem deixar referências inconsistentes. |
 | **Mover Cartão** | Autenticado | Permite apenas `A FAZER -> FAZENDO` (respeitando limite WIP e registrando `inicio`) e `FAZENDO -> FEITO` (registrando `termino`), respeitando a ordem cronológica. |
@@ -146,22 +144,36 @@ IServicoQuadro* sQuadro = &servicoQuadro;
 IServicoCartaoAtividade* sCartao = &servicoCartao;
 ```
 
-* **Fluxo de sessão**: `sPessoa->criar` pode ser chamado sem login; os demais serviços exigem `sAutenticacao->autenticar(...)` antes. Para encerrar a sessão explicitamente, utilize `autenticacao.encerrarSessao()` (método da classe concreta).
+* **Fluxo de sessão**: `sPessoa->criar` pode ser chamado sem login; os demais serviços exigem `sAutenticacao->autenticar(...)` antes. Para encerrar a sessão (logout), utilize `sAutenticacao->encerrarSessao()`, que faz parte da interface.
 * **Tratamento de erros**: envolva chamadas em blocos `try / catch` tratando `std::logic_error` (e `std::invalid_argument`) e exibindo `e.what()`.
 
 ---
 
 ## Compilação, Testes e Documentação
 
-> **Atenção:** Cada arquivo `main*.cpp` possui sua própria função `main()`. Não compile mais de um arquivo com `main()` no mesmo executável. No **Code::Blocks** (`projeto_tp1.cbp`), mantenha os executáveis de teste separados do alvo principal do sistema.
+> **Atenção:** Cada arquivo `main*.cpp` possui sua própria função `main()`. Não compile mais de um arquivo com `main()` no mesmo executável.
 
-### 1. Sistema Integrado
+### Code::Blocks
+Abra `projeto_tp1.cbp` e escolha o alvo (*Build target*) na barra de ferramentas. Cada alvo já tem os arquivos certos associados:
+
+| Alvo | Executável gerado | Conteúdo |
+| :--- | :--- | :--- |
+| `Debug` / `Release` | `bin/Debug/projeto_tp1` / `bin/Release/projeto_tp1` | Sistema integrado (menus em modo texto) |
+| `Teste_Dominios` | `bin/Testes/teste_dominios` | Testes unitários dos 11 domínios |
+| `Teste_Entidades` | `bin/Testes/teste_entidades` | Testes das entidades e das interfaces abstratas |
+| `Teste_Servicos` | `bin/Testes/teste_servicos` | 27 casos de teste da camada de serviço |
+
+Use *Build → Build and run* (F9). No Windows, os executáveis recebem a extensão `.exe`.
+
+### Linha de comando (g++)
+
+#### Sistema integrado
 ```bash
 g++ -std=c++11 -Wall -Wextra -pedantic -Iinclude src/*.cpp main.cpp -o sistema_kanban
 ./sistema_kanban
 ```
 
-### 2. Testes Unitários por Camada
+#### Testes unitários por camada
 * **Domínios**:
   ```bash
   g++ -std=c++11 -Wall -Wextra -pedantic -Iinclude -Itests src/dominios.cpp tests/testes_dominios.cpp main_teste_dominios.cpp -o teste_dominios
@@ -178,18 +190,14 @@ g++ -std=c++11 -Wall -Wextra -pedantic -Iinclude src/*.cpp main.cpp -o sistema_k
   ./teste_servicos
   ```
 
-### 3. Doxygen e Diagramas UML
-* **Gerar documentação HTML**: execute `doxygen Doxyfile` na raiz do projeto (documenta classes e membros públicos sob a perspectiva do usuário).
-* **Diagramas UML**: arquivos `.dot` (Graphviz) e `.pdf` do modelo de arquitetura encontram-se em `docs/`.
+### Modelo de arquitetura
+* **Modelo de arquitetura**: `docs/modelo_de_arquitetura.pdf` (diagrama UML de módulos, interfaces e relacionamentos, responsabilidades de cada módulo, interfaces, modelo de entidades e decisões de projeto).
+* **Fontes dos diagramas**: `docs/uml_modulos.dot` e `docs/uml_entidades.dot` (Graphviz; gere a imagem com `dot -Tpng arquivo.dot -o arquivo.png`).
 
 ---
 
-## Pendências, Decisões e Referências
+## Decisões de Projeto, Entrega e Referências
 
-* **Marcadores no código**: decisões da camada de serviço estão marcadas como `ESCOLHA(Membro3)` e definições pendentes da equipe como `TODO(Membro2)`. Para localizá-las:
-  ```bash
-  grep -rn "ESCOLHA(Membro3)" include tests
-  grep -rn "TODO(Membro2)" include tests
-  ```
-* **Entrega e teste fumaça**: o projeto prevê identificação dos membros e artefatos (`EQUIPE.txt`), pacote ZIP no formato `T1-TP1-X-Y-Z.ZIP` (com matrículas) e vídeo de *smoke test* cobrindo um cenário de sucesso para cada funcionalidade do sistema integrado.
-* **Referências**: Especificação do Trabalho Prático de Técnicas de Programação 1 (`TP1-TRABALHO`), Plano de Divisão de Tarefas da equipe, repositório `CaioJorge7/projeto-TP1` e referência estrutural `Eduardo734-ai/Trabalho_de_Tecnicas_de_Programacao_1`.
+* **Decisões de projeto**: as regras adotadas onde a especificação deixa margem (unidade de tempo, permissões, exclusão bloqueada em vez de cascata, atributos de referência entre entidades, listagem completa) estão descritas na seção 7 do modelo de arquitetura e comentadas no código como `Decisao de projeto:`.
+* **Entrega e teste fumaça**: identificação dos membros e artefatos em `EQUIPE.txt`, pacote ZIP no formato `T1-TP1-X-Y-Z.ZIP` (com as matrículas), código-fonte e executáveis, e vídeo de *smoke test* cobrindo um cenário de sucesso para cada funcionalidade do sistema integrado.
+* **Referências**: Especificação do Trabalho Prático de Técnicas de Programação 1 (`TP1-TRABALHO`) e repositório da equipe `CaioJorge7/projeto-TP1`.

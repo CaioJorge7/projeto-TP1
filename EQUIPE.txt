@@ -17,7 +17,7 @@ Sistema: Gestão de Projetos Kanban em C++
    - Artefatos produzidos:
      * Classes de entidade (include/entidades.h, src/entidades.cpp)
      * Interfaces abstratas entre módulos (include/interfaces.h)
-     * Modelo de Arquitetura UML em PDF (docs/Modelo_Arquitetura_TP1_Membro2.pdf)
+     * Modelo de arquitetura em PDF e diagramas UML (docs/modelo_de_arquitetura.pdf, docs/uml_modulos.dot, docs/uml_entidades.dot)
      * Testes unitários das entidades (tests/testes_entidades.h, tests/testes_entidades.cpp, main_teste_entidades.cpp)
 
 3. Pablo - Camada de Serviço e Persistência

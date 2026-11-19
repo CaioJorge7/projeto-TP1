@@ -74,7 +74,7 @@ public:
         : pessoas(pessoas), projetos(projetos), quadros(quadros), cartoes(cartoes),
           sessao(sessao) {}
 
-    // ESCOLHA(Membro3): so o gestor DO projeto cria quadro nele (nao basta ser
+    // Decisao de projeto: so o gestor DO projeto cria quadro nele (nao basta ser
     //   GESTOR). Falha se o projeto nao existe ou se o identificador do quadro
     //   ja existe. Assim a multiplicidade 1 projeto : 0..* quadros e mantida.
     /**
@@ -91,7 +91,7 @@ public:
         }
     }
 
-    // ESCOLHA(Membro3): qualquer pessoa autenticada le qualquer quadro.
+    // Decisao de projeto: qualquer pessoa autenticada le qualquer quadro.
     /**
      * @brief Le os dados de um quadro.
      * @param identificador Identificador do quadro.
@@ -103,9 +103,9 @@ public:
         return exigirQuadro(identificador);
     }
 
-    // ESCOLHA(Membro3): so o gestor do projeto do quadro atualiza. O
+    // Decisao de projeto: so o gestor do projeto do quadro atualiza. O
     //   identificador e o projetoId nao mudam: valem os que ja estao guardados.
-    // ESCOLHA(Membro3): o novo limite nao pode ser menor que o WIP atual
+    // Decisao de projeto: o novo limite nao pode ser menor que o WIP atual
     //   (cartoes em FAZENDO), senao o quadro ficaria acima do limite.
     /**
      * @brief Atualiza os dados de um quadro.
@@ -126,9 +126,10 @@ public:
         quadros->atualizar(novo);
     }
 
-    // ESCOLHA(Membro3): so o gestor do projeto do quadro exclui, e so se o
-    //   quadro nao tiver cartoes (evita inconsistencia, requisito 15).
-    // TODO(Membro2): se preferir cascata, mudar aqui.
+    // Decisao de projeto: so o gestor do projeto do quadro exclui, e so se o
+    //   quadro nao tiver cartoes. A exclusao e bloqueada (e nao feita em
+    //   cascata) para nao apagar cartoes sem aviso e para nao deixar cartao
+    //   sem quadro (requisito 15).
     /**
      * @brief Exclui um quadro.
      * @param identificador Identificador do quadro.
@@ -145,8 +146,9 @@ public:
         quadros->remover(identificador);
     }
 
-    // TODO(Membro2): decidir se deve listar so os quadros de um projeto. Aqui
-    //   qualquer pessoa autenticada ve todos os quadros.
+    // Decisao de projeto: qualquer pessoa autenticada lista todos os quadros
+    //   (o enunciado libera LISTAR QUADRO para os dois papeis e nao preve
+    //   filtro). A apresentacao exibe o identificador de cada um.
     /**
      * @brief Lista todos os quadros.
      * @return Copias dos quadros, em ordem de identificador.

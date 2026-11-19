@@ -9,7 +9,7 @@
  * @brief Contratos abstratos entre Apresentacao e Servico para o TP1 Kanban.
  *
  * A camada de apresentacao depende somente destes contratos. Os metodos
- * serao implementados pelas controladoras da camada de servico (Membro 3).
+ * sao implementados pelas controladoras da camada de servico.
  * Os papeis, multiplicidades, WIP e regras de estado sao verificados no servico.
  * As falhas de validacao/integridade devem ser comunicadas por excecoes.
  */
@@ -36,8 +36,15 @@ class IServicoAutenticacao {
 public:
     /** @brief Destrutor virtual padrao. */
     virtual ~IServicoAutenticacao() {}
-    /** @brief Autentica usuario por email e senha. */
+    /**
+     * @brief Autentica usuario por email e senha.
+     * @param email Email da conta.
+     * @param senha Senha da conta.
+     * @return true se o email existe e a senha confere; false caso contrario.
+     */
     virtual bool autenticar(const Email& email, const Senha& senha) const = 0;
+    /** @brief Encerra a sessao do usuario autenticado (logout). */
+    virtual void encerrarSessao() = 0;
 };
 
 /** @brief Contrato dos 5 servicos CRUD de Projeto. */
@@ -76,9 +83,9 @@ public:
 
 /**
  * @brief Contrato dos 11 servicos de Cartao: CRUD, mover, metricas e WIP.
- * @details Prazos de cycle time e lead time serao expressos em minutos.
- * A especificacao define os intervalos, mas nao a unidade; o minuto e
- * convencao de interface proposta aqui e pode ser ajustado em equipe.
+ * @details Tempo de ciclo e lead time sao expressos em minutos.
+ * A especificacao define os intervalos, mas nao a unidade; a equipe
+ * adotou o minuto como unidade de todo o sistema.
  */
 class IServicoCartaoAtividade {
 public:

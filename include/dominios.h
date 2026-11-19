@@ -158,7 +158,8 @@ private:
 /**
  * @brief Representa o tamanho estimado de uma atividade.
  * 
- * Valores válidos: "GRANDE", "MEDIO", "PEQUENO" (aceita também "MÉDIO").
+ * Valores válidos: "GRANDE", "MEDIO", "PEQUENO" (sem acento, conforme o requisito
+ * nao funcional 12, que dispensa acentuacao nas validacoes).
  */
 class Tamanho : public Dominio {
 private:

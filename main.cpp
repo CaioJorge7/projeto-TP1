@@ -9,10 +9,7 @@
  *  3. Instanciar as cinco controladoras de servico concretas (CS*).
  *  4. Expor cada controladora apenas pelo ponteiro de sua interface abstrata
  *     (IServico*) e injetar esses ponteiros na Aplicacao.
- *  5. Criar o callback de logout (std::function<void()>) que chama
- *     CSAutenticacao::encerrarSessao(), desacoplando a apresentacao da
- *     classe concreta.
- *  6. Iniciar o loop principal da Aplicacao.
+ *  5. Iniciar o loop principal da Aplicacao.
  *
  * A camada de apresentacao (Aplicacao e sub-controladoras) NUNCA acessa
  * diretamente CS*, containers.h ou sessao.h: ela depende exclusivamente
@@ -20,13 +17,12 @@
  */
 
 #include <iostream>
-#include <functional>
 
-// Camada de domínio e entidades (Membros 1 e 2)
+// Dominios e entidades
 #include "dominios.h"
 #include "entidades.h"
 
-// Camada de serviço (Membro 3) - incluída SOMENTE em main.cpp
+// Camada de servico - incluida SOMENTE em main.cpp
 #include "containers.h"
 #include "sessao.h"
 #include "controladoras_pessoa.h"
@@ -34,7 +30,7 @@
 #include "controladoras_quadro.h"
 #include "controladoras_cartao.h"
 
-// Camada de apresentação (Membro 4)
+// Camada de apresentacao
 #include "apresentacao.h"
 
 /**
@@ -62,7 +58,7 @@ int main() {
     Sessao sessao;
 
     // -----------------------------------------------------------------------
-    // 3. Controladoras de servico concretas (camada de servico, Membro 3)
+    // 3. Controladoras de servico concretas (camada de servico)
     //    Cada uma recebe ponteiros para os conteineres e para a sessao.
     // -----------------------------------------------------------------------
     CSAutenticacao autenticacao(&pessoas, &sessao);
@@ -81,19 +77,9 @@ int main() {
     IServicoCartaoAtividade* sCartao  = &servicoCartao;
 
     // -----------------------------------------------------------------------
-    // 5. Callback de logout
-    //    encerrarSessao() so existe na classe concreta CSAutenticacao.
-    //    O lambda captura a referencia e e injetado na Aplicacao, que o
-    //    chama sem conhecer CSAutenticacao diretamente.
+    // 5. Orquestrador da apresentacao
     // -----------------------------------------------------------------------
-    std::function<void()> fnLogout = [&autenticacao]() {
-        autenticacao.encerrarSessao();
-    };
-
-    // -----------------------------------------------------------------------
-    // 6. Orquestrador da apresentacao
-    // -----------------------------------------------------------------------
-    Aplicacao app(sAuth, sPessoa, sProjeto, sQuadro, sCartao, fnLogout);
+    Aplicacao app(sAuth, sPessoa, sProjeto, sQuadro, sCartao);
     app.executar();
 
     return 0;

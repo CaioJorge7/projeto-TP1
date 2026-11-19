@@ -170,11 +170,11 @@ public:
         : pessoas(pessoas), projetos(projetos), quadros(quadros), cartoes(cartoes),
           sessao(sessao) {}
 
-    // ESCOLHA(Membro3): so o gestor do projeto do quadro cria cartao nele.
-    //   O desenvolvedor precisa existir e ter papel DESENVOLVEDOR.
-    // TODO(Membro2): confirmar se um GESTOR tambem pode ser desenvolvedor de
-    //   cartao (aqui nao pode).
-    // ESCOLHA(Membro3): o cartao novo sempre entra em A FAZER, com inicio e
+    // Decisao de projeto: so o gestor do projeto do quadro cria cartao nele.
+    // Decisao de projeto: o responsavel pelo cartao precisa existir e ter papel
+    //   DESENVOLVEDOR; um GESTOR nao pode ser desenvolvedor de cartao, pois o
+    //   diagrama do enunciado separa os dois papeis.
+    // Decisao de projeto: o cartao novo sempre entra em A FAZER, com inicio e
     //   termino vazios, seja qual for o estado recebido. A "entrada" precisa
     //   vir preenchida (sem ela nao da pra calcular o lead time).
     /**
@@ -204,7 +204,7 @@ public:
         }
     }
 
-    // ESCOLHA(Membro3): qualquer pessoa autenticada le qualquer cartao.
+    // Decisao de projeto: qualquer pessoa autenticada le qualquer cartao.
     /**
      * @brief Le os dados de um cartao.
      * @param identificador Identificador do cartao.
@@ -216,7 +216,7 @@ public:
         return exigirCartao(identificador);
     }
 
-    // ESCOLHA(Membro3): so o gestor do projeto do quadro atualiza. Valem os
+    // Decisao de projeto: so o gestor do projeto do quadro atualiza. Valem os
     //   dados guardados para identificador, quadroId, estado, entrada, inicio e
     //   termino (estado e datas so mudam pelo "mover"). O desenvolvedor pode ser
     //   trocado, desde que o novo exista e tenha papel DESENVOLVEDOR.
@@ -241,7 +241,7 @@ public:
         cartoes->atualizar(novo);
     }
 
-    // ESCOLHA(Membro3): so o gestor do projeto do quadro exclui. Cartao nao
+    // Decisao de projeto: so o gestor do projeto do quadro exclui. Cartao nao
     //   tem nada dependendo dele, entao pode ser excluido em qualquer coluna.
     /**
      * @brief Exclui um cartao.
@@ -256,8 +256,9 @@ public:
         cartoes->remover(identificador);
     }
 
-    // ESCOLHA(Membro3): qualquer pessoa autenticada lista todos os cartoes.
-    // TODO(Membro2): decidir se deve listar so os cartoes de um quadro.
+    // Decisao de projeto: qualquer pessoa autenticada lista todos os cartoes
+    //   (o enunciado libera LISTAR CARTAO para os dois papeis e nao preve
+    //   filtro). A apresentacao exibe o identificador de cada um.
     /**
      * @brief Lista todos os cartoes.
      * @return Copias dos cartoes, em ordem de identificador.
@@ -268,9 +269,9 @@ public:
         return cartoes->listar();
     }
 
-    // ESCOLHA(Membro3): qualquer pessoa autenticada move qualquer cartao (o
+    // Decisao de projeto: qualquer pessoa autenticada move qualquer cartao (o
     //   enunciado libera MOVER para os dois papeis).
-    // ESCOLHA(Membro3): so valem A FAZER -> FAZENDO e FAZENDO -> FEITO.
+    // Decisao de projeto: so valem A FAZER -> FAZENDO e FAZENDO -> FEITO.
     //   A FAZER -> FAZENDO falha se o WIP ja chegou no limite do quadro e
     //   grava "inicio". FAZENDO -> FEITO grava "termino". O instante nao pode
     //   ser anterior ao timestamp anterior do cartao (evita tempo negativo).
@@ -323,7 +324,7 @@ public:
         cartoes->atualizar(cartao);
     }
 
-    // ESCOLHA(Membro3): tempo de ciclo = termino - inicio (em minutos). So
+    // Decisao de projeto: tempo de ciclo = termino - inicio (em minutos). So
     //   existe para cartao em FEITO.
     /**
      * @brief Calcula o cycle time do cartao (termino - inicio), em minutos.
@@ -335,7 +336,7 @@ public:
         return lerTempo(idCartao, false);
     }
 
-    // ESCOLHA(Membro3): media so dos cartoes em FEITO do quadro. Sem nenhum
+    // Decisao de projeto: media so dos cartoes em FEITO do quadro. Sem nenhum
     //   cartao concluido lanca excecao.
     /**
      * @brief Media dos cycle times dos cartoes concluidos do quadro, em minutos.
@@ -347,7 +348,7 @@ public:
         return lerMedia(idQuadro, false);
     }
 
-    // ESCOLHA(Membro3): lead time = termino - entrada (em minutos). So
+    // Decisao de projeto: lead time = termino - entrada (em minutos). So
     //   existe para cartao em FEITO.
     /**
      * @brief Calcula o lead time do cartao (termino - entrada), em minutos.
@@ -369,7 +370,7 @@ public:
         return lerMedia(idQuadro, true);
     }
 
-    // ESCOLHA(Membro3): WIP = quantidade de cartoes do quadro em FAZENDO.
+    // Decisao de projeto: WIP = quantidade de cartoes do quadro em FAZENDO.
     /**
      * @brief Contagem atual de cartoes em FAZENDO no quadro.
      * @param idQuadro Identificador do quadro.

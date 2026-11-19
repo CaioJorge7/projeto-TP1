@@ -18,7 +18,6 @@
  *                           sub-controladores de apresentacao.
  */
 
-#include <functional>
 #include <string>
 #include "interfaces.h"
 
@@ -45,7 +44,7 @@ private:
     void atualizar();
     /** @brief Fluxo de exclusao da propria conta (servico 4). */
     void excluir();
-    /** @brief Fluxo de listagem de todas as Pessoas (servico 5). */
+    /** @brief Fluxo de listagem de Pessoas: exibe o e-mail (identificador) de cada uma (servico 5). */
     void listar();
 
 public:
@@ -84,7 +83,7 @@ private:
     void atualizar();
     /** @brief Fluxo de exclusao de Projeto (servico 9). */
     void excluir();
-    /** @brief Fluxo de listagem de todos os Projetos (servico 10). */
+    /** @brief Fluxo de listagem de Projetos: exibe o identificador de cada um (servico 10). */
     void listar();
 
 public:
@@ -123,7 +122,7 @@ private:
     void atualizar();
     /** @brief Fluxo de exclusao de Quadro (servico 14). */
     void excluir();
-    /** @brief Fluxo de listagem de todos os Quadros (servico 15). */
+    /** @brief Fluxo de listagem de Quadros: exibe o identificador de cada um (servico 15). */
     void listar();
 
 public:
@@ -167,7 +166,7 @@ private:
     void atualizar();
     /** @brief Fluxo de exclusao de Cartao (servico 19). */
     void excluir();
-    /** @brief Fluxo de listagem de todos os Cartoes (servico 20). */
+    /** @brief Fluxo de listagem de Cartoes: exibe o identificador de cada um (servico 20). */
     void listar();
     /** @brief Fluxo de movimentacao Kanban: A FAZER->FAZENDO ou FAZENDO->FEITO (servico 21). */
     void mover();
@@ -206,11 +205,8 @@ public:
  * Gerencia os menus raiz (inicial e principal) e delega as operacoes
  * especificas de cada entidade para as sub-controladoras de apresentacao.
  *
- * Desacoplamento do logout:
- *   IServicoAutenticacao nao expoe encerrarSessao(). Por isso, o main.cpp
- *   injeta um std::function<void()> (callback) que chama
- *   CSAutenticacao::encerrarSessao() de forma desacoplada, mantendo a
- *   camada de apresentacao livre de qualquer dependencia de CS*.
+ * Login e logout usam apenas o contrato IServicoAutenticacao
+ * (autenticar e encerrarSessao), sem dependencia das classes CS*.
  */
 class Aplicacao {
 private:
@@ -220,7 +216,6 @@ private:
     ApresentacaoProjeto       apProjeto;  ///< Sub-controladora de Projeto.
     ApresentacaoQuadro        apQuadro;   ///< Sub-controladora de Quadro.
     ApresentacaoCartao        apCartao;   ///< Sub-controladora de Cartao.
-    std::function<void()>     fnLogout;   ///< Callback de logout injetado por main.cpp.
     bool                      autenticado; ///< Estado local: ha usuario autenticado?
 
     /**
@@ -254,7 +249,8 @@ private:
     void autenticar();
 
     /**
-     * @brief Realiza o logout: invoca fnLogout e define autenticado = false.
+     * @brief Realiza o logout: chama IServicoAutenticacao::encerrarSessao e
+     *        define autenticado = false.
      */
     void logout();
 
@@ -266,14 +262,12 @@ public:
      * @param spj       Servico de Projeto.
      * @param sq        Servico de Quadro.
      * @param sc        Servico de Cartao.
-     * @param fnLogout  Callback que encerra a sessao na camada de servico.
      */
     Aplicacao(IServicoAutenticacao*    sa,
               IServicoPessoa*          sp,
               IServicoProjeto*         spj,
               IServicoQuadro*          sq,
-              IServicoCartaoAtividade* sc,
-              std::function<void()>    fnLogout);
+              IServicoCartaoAtividade* sc);
 
     /**
      * @brief Inicia o loop principal da aplicacao.

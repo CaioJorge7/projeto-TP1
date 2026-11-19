@@ -16,17 +16,17 @@
  * multiplicidade, WIP, exclusao) ficam nas controladoras.
  */
 
-// ESCOLHA(Membro3): persistencia em memoria com std::map (permitido pelo
+// Decisao de projeto: armazenamento em memoria com std::map (permitido pelo
 //   enunciado, requisito 23). Cada container guarda um tipo de entidade,
 //   indexado pela chave primaria em texto (getValor()).
-// ESCOLHA(Membro3): as entidades do Membro 2 ja trazem os vinculos (gestorEmail,
+// Decisao de projeto: as entidades ja trazem os vinculos (gestorEmail,
 //   projetoId, quadroId, desenvolvedorEmail), entao os containers nao guardam
 //   vinculos a parte. As buscas por vinculo (contar...) varrem o mapa.
-// ESCOLHA(Membro3): as entidades nao tem construtor padrao, entao pesquisar
+// Decisao de projeto: as entidades nao tem construtor padrao, entao pesquisar
 //   devolve ponteiro (nullptr se nao existe) em vez de preencher um objeto.
 //   O ponteiro vale ate o proximo incluir/remover; copie o objeto se precisar
 //   guardar.
-// ESCOLHA(Membro3): incluir devolve false se a chave ja existe; remover e
+// Decisao de projeto: incluir devolve false se a chave ja existe; remover e
 //   atualizar devolvem false se a chave nao existe.
 
 /**

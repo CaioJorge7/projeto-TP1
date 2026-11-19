@@ -190,6 +190,21 @@ g++ -std=c++11 -Wall -Wextra -pedantic -Iinclude src/*.cpp main.cpp -o sistema_k
   ./teste_servicos
   ```
 
+### Documentação Doxygen
+
+A documentação do código-fonte é gerada utilizando o Doxygen. Para gerar ou atualizar a documentação, execute na raiz do projeto:
+
+```bash
+doxygen Doxyfile
+```
+
+O arquivo de configuração `Doxyfile` define:
+- `OUTPUT_DIRECTORY = docs/doxygen`: diretório de saída da documentação.
+- `OUTPUT_LANGUAGE = Brazilian`: idioma da documentação em português.
+- `HAVE_DOT = NO`: desativa a integração com Graphviz.
+
+Após a geração, abra `docs/doxygen/html/index.html` em um navegador para consultar a documentação
+
 ### Modelo de arquitetura
 * **Modelo de arquitetura**: `docs/modelo_de_arquitetura.pdf` (diagrama UML de módulos, interfaces e relacionamentos, responsabilidades de cada módulo, interfaces, modelo de entidades e decisões de projeto).
 * **Fontes dos diagramas**: `docs/uml_modulos.dot` e `docs/uml_entidades.dot` (Graphviz; gere a imagem com `dot -Tpng arquivo.dot -o arquivo.png`).

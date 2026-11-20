@@ -2,6 +2,8 @@
 
 Sistema de gestão de projetos baseado no método Kanban desenvolvido em C++ (padrão C++11) para a disciplina **Técnicas de Programação 1 (TP1)**, com projeto compatível com **Code::Blocks**. O sistema organiza o fluxo em quadros com as colunas **A FAZER**, **FAZENDO** e **FEITO**, papéis de **GESTOR** e **DESENVOLVEDOR**, autenticação de usuários e métricas de acompanhamento Kanban.
 
+**Vídeo do teste fumaça:** https://www.youtube.com/watch?v=HMwji6CBmVM
+
 ---
 
 ## Visão Geral e Arquitetura
@@ -214,5 +216,5 @@ Após a geração, abra `docs/doxygen/html/index.html` em um navegador para cons
 ## Decisões de Projeto, Entrega e Referências
 
 * **Decisões de projeto**: as regras adotadas onde a especificação deixa margem (unidade de tempo, permissões, exclusão bloqueada em vez de cascata, atributos de referência entre entidades, listagem completa) estão descritas na seção 7 do modelo de arquitetura e comentadas no código como `Decisao de projeto:`.
-* **Entrega e teste fumaça**: identificação dos membros e artefatos em `EQUIPE.txt`, pacote ZIP no formato `T1-TP1-X-Y-Z.ZIP` (com as matrículas), código-fonte e executáveis, e vídeo de *smoke test* cobrindo um cenário de sucesso para cada funcionalidade do sistema integrado.
+* **Entrega e teste fumaça**: identificação dos membros e artefatos em `EQUIPE.txt`, pacote ZIP no formato `T1-TP1-X-Y-Z.ZIP` (com as matrículas), código-fonte e executáveis, e vídeo de *smoke test* cobrindo um cenário de sucesso para cada funcionalidade do sistema integrado ([assistir no YouTube](https://www.youtube.com/watch?v=HMwji6CBmVM)).
 * **Referências**: Especificação do Trabalho Prático de Técnicas de Programação 1 (`TP1-TRABALHO`) e repositório da equipe `CaioJorge7/projeto-TP1`.

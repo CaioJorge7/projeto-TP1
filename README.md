@@ -203,7 +203,7 @@ O arquivo de configuração `Doxyfile` define:
 - `OUTPUT_LANGUAGE = Brazilian`: idioma da documentação em português.
 - `HAVE_DOT = NO`: desativa a integração com Graphviz.
 
-Após a geração, abra `docs/doxygen/html/index.html` em um navegador para consultar a documentação
+Após a geração, abra `docs/doxygen/html/index.html` em um navegador para consultar a documentação.
 
 ### Modelo de arquitetura
 * **Modelo de arquitetura**: `docs/modelo_de_arquitetura.pdf` (diagrama UML de módulos, interfaces e relacionamentos, responsabilidades de cada módulo, interfaces, modelo de entidades e decisões de projeto).
